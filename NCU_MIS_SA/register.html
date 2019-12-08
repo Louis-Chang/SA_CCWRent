@@ -30,8 +30,8 @@
                 	**
                 	**-->
                 <div class="input text required">
-                    <label for="member_id">身分證字號</label>
-                    <input name="id" maxlength="10" type="text" id="member_id" required="required">
+                    <label for="member_IDNumber">身分證字號</label>
+                    <input name="IDNumber" maxlength="10" type="text" id="member_IDNumber" required="required">
                 </div>
                 <div class="input password required">
                     <label for="member_password">密碼</label>
@@ -80,9 +80,15 @@
                     });
 
                     function submit() {
-                        var name = $('#member_name').val();
-                        var email = $('#member_email').val();
+                        var IDNumber = $('#member_IDNumber').val();
                         var password = $('#member_password').val();
+                        var confirmpassword = $('#member_confirmpassword').val();
+                        var name = $('#member_name').val();
+                        var birth = $('#member_birth').val();
+                        var mobilephone = $('#member_mobilephone').val();
+                        var address = $('#member_address').val();
+                        var license = $('#member_license').val();
+                        var email = $('#member_email').val();
 
                         var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
                         var password_rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
@@ -90,15 +96,23 @@
                         if (!email_rule.test(email)) {
                             alert("Email格式不符！");
                         }
+                        else if(password != confirmpassword) {
+                            alert("密碼與確認密碼不相同，請重新輸入");
+                        }
                         else if(!password_rule.test(password)) {
                             alert("密碼格式不符，長度至少8，且至少包含一個數字和英文字母！");
                         }
                         else {
                             // 將資料組成JSON格式
                             var data_object = {
+                            	"IDNumber": IDNumber,
+                            	"password": password,
                                 "name": name,
-                                "email": email,
-                                "password": password
+                                "birth": birth,
+                                "mobilephone": mobilephone,
+                                "address": address,
+                                "license": license,
+                                "email": email
                             };
 
                             // 將JSON格式轉換成字串

@@ -149,14 +149,20 @@ public class MemberHelper {
                 
                 /** 將 ResultSet 之資料取出 */
                 int member_id = rs.getInt("id");
-                String name = rs.getString("name");
-                String email = rs.getString("email");
+                String IDNumber = rs.getString("IDNumber");
                 String password = rs.getString("password");
+                String name = rs.getString("name");
+                String birth = rs.getString("birth");
+                String mobilephone = rs.getString("mobilephone");
+                String address = rs.getString("address");
+                String license = rs.getString("license");
+                String email = rs.getString("email");
+
                 int login_times = rs.getInt("login_times");
                 String status = rs.getString("status");
                 
                 /** 將每一筆會員資料產生一名新Member物件 */
-                m = new Member(member_id, email, password, name, login_times, status);
+                m = new Member(member_id,IDNumber, password, name, birth, mobilephone, address, license, email, login_times, status);
                 /** 取出該名會員之資料並封裝至 JSONsonArray 內 */
                 jsa.put(m.getData());
             }
@@ -231,14 +237,19 @@ public class MemberHelper {
                 
                 /** 將 ResultSet 之資料取出 */
                 int member_id = rs.getInt("id");
-                String name = rs.getString("name");
-                String email = rs.getString("email");
+                String IDNumber = rs.getString("IDNumber");
                 String password = rs.getString("password");
+                String name = rs.getString("name");
+                String birth = rs.getString("birth");
+                String mobilephone = rs.getString("mobilephone");
+                String address = rs.getString("address");
+                String license = rs.getString("license");
+                String email = rs.getString("email");
                 int login_times = rs.getInt("login_times");
                 String status = rs.getString("status");
                 
                 /** 將每一筆會員資料產生一名新Member物件 */
-                m = new Member(member_id, email, password, name, login_times, status);
+                m = new Member(member_id,IDNumber, password, name, birth, mobilephone, address, license, email, login_times, status);
                 /** 取出該名會員之資料並封裝至 JSONsonArray 內 */
                 jsa.put(m.getData());
             }
@@ -386,15 +397,21 @@ public class MemberHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "INSERT INTO `missa`.`members`(`name`, `email`, `password`, `modified`, `created`, `login_times`, `status`)"
-                    + " VALUES(?, ?, ?, ?, ?, ?, ?)";
+            //id, password, name, birth, mobilephone, address, license, email
+            String sql = "INSERT INTO `missa`.`members`(`name`, `email`, `password`, `modified`, `created`, `login_times`, `status`, `IDNumber`, `birth`, `mobilephone`, `address`, `license`)"
+                    + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             
             /** 取得所需之參數 */
             String name = m.getName();
             String email = m.getEmail();
-            String password = m.getPassword();
+            String password = m.getPassword();            
             int login_times = m.getLoginTimes();
             String status = m.getStatus();
+            String IDNumber = m.getIDNumber();
+            String birth = m.getBirth();
+            String mobilephone = m.getMobilephone();
+            String address = m.getAddress();
+            String license = m.getLicense();
             
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
@@ -405,6 +422,11 @@ public class MemberHelper {
             pres.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now()));
             pres.setInt(6, login_times);
             pres.setString(7, status);
+            pres.setString(8, IDNumber);
+            pres.setString(9, birth);
+            pres.setString(10, mobilephone);
+            pres.setString(11, address);
+            pres.setString(12, license);
             
             /** 執行新增之SQL指令並記錄影響之行數 */
             row = pres.executeUpdate();

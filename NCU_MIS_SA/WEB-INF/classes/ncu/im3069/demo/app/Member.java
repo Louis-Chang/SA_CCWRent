@@ -17,17 +17,33 @@ import java.util.Calendar;
 
 public class Member {
     
+	
     /** id，會員編號 */
     private int id;
+  
+    /** IDNumber，身分證字號 */
+    private String IDNumber;
     
-    /** email，會員電子郵件信箱 */
-    private String email;
+    /** password，會員密碼 */
+    private String password;
     
     /** name，會員姓名 */
     private String name;
     
-    /** password，會員密碼 */
-    private String password;
+    /** birth，會員生日 */
+    private String birth;
+    
+    /** mobilephone，行動電話 */
+    private String mobilephone;
+    
+    /** address，會員住址*/
+    private String address;
+    
+    /** license，會員駕照管轄編號*/
+    private String license;
+    
+    /** email，會員電子郵件信箱 */
+    private String email;
     
     /** login_times，更新時間的分鐘數 */
     private int login_times;
@@ -41,15 +57,18 @@ public class Member {
     /**
      * 實例化（Instantiates）一個新的（new）Member物件<br>
      * 採用多載（overload）方法進行，此建構子用於建立會員資料時，產生一名新的會員
-     *
-     * @param email 會員電子信箱
-     * @param password 會員密碼
-     * @param name 會員姓名
      */
-    public Member(String email, String password, String name) {
-        this.email = email;
-        this.password = password;
-        this.name = name;
+    
+    //IDNumber, password, name, birth, mobilephone, address, license, email
+    public Member(String IDNumber, String password, String name, String birth, String mobilephone, String address, String license, String email) {
+    	this.IDNumber = IDNumber;
+    	this.password = password;
+    	this.name = name;
+    	this.birth = birth;
+    	this.mobilephone = mobilephone;
+    	this.address = address;
+    	this.license = license;
+    	this.email = email;
         update();
     }
 
@@ -62,11 +81,16 @@ public class Member {
      * @param password 會員密碼
      * @param name 會員姓名
      */
-    public Member(int id, String email, String password, String name) {
+    public Member(int id, String IDNumber, String password, String name, String birth, String mobilephone, String address, String license, String email) {
         this.id = id;
-        this.email = email;
-        this.password = password;
-        this.name = name;
+    	this.IDNumber = IDNumber;
+    	this.password = password;
+    	this.name = name;
+    	this.birth = birth;
+    	this.mobilephone = mobilephone;
+    	this.address = address;
+    	this.license = license;
+    	this.email = email;
         /** 取回原有資料庫內該名會員之更新時間分鐘數與組別 */
         getLoginTimesStatus();
         /** 計算會員之組別 */
@@ -84,11 +108,16 @@ public class Member {
      * @param login_times 更新時間的分鐘數
      * @param status the 會員之組別
      */
-    public Member(int id, String email, String password, String name, int login_times, String status) {
+    public Member(int id, String IDNumber, String password, String name, String birth, String mobilephone, String address, String license, String email, int login_times, String status) {
         this.id = id;
-        this.email = email;
-        this.password = password;
-        this.name = name;
+    	this.IDNumber = IDNumber;
+    	this.password = password;
+    	this.name = name;
+    	this.birth = birth;
+    	this.mobilephone = mobilephone;
+    	this.address = address;
+    	this.license = license;
+    	this.email = email;
         this.login_times = login_times;
         this.status = status;
     }
@@ -101,33 +130,39 @@ public class Member {
     public int getID() {
         return this.id;
     }
+    
+    public String getIDNumber() {
+        return this.IDNumber;
+    }
+    
+    public String getPassword() {
+        return this.password;
+    }
+    
+    public String getName() {
+        return this.name;
+    }
+    
+    public String getBirth() {
+        return this.birth;
+    }
+    
+    public String getMobilephone() {
+        return this.mobilephone;
+    }
+    
+    public String getAddress() {
+        return this.address;
+    }
 
-    /**
-     * 取得會員之電子郵件信箱
-     *
-     * @return the email 回傳會員電子郵件信箱
-     */
+    public String getLicense() {
+        return this.license;
+    }
+    
     public String getEmail() {
         return this.email;
     }
     
-    /**
-     * 取得會員之姓名
-     *
-     * @return the name 回傳會員姓名
-     */
-    public String getName() {
-        return this.name;
-    }
-
-    /**
-     * 取得會員之密碼
-     *
-     * @return the password 回傳會員密碼
-     */
-    public String getPassword() {
-        return this.password;
-    }
     
     /**
      * 取得更新資料時間之分鐘數
@@ -181,15 +216,20 @@ public class Member {
         /** 透過JSONObject將該名會員所需之資料全部進行封裝*/ 
         JSONObject jso = new JSONObject();
         jso.put("id", getID());
-        jso.put("name", getName());
-        jso.put("email", getEmail());
+        jso.put("IDNumber", getIDNumber());
         jso.put("password", getPassword());
+        jso.put("name", getName());
+        jso.put("birth", getBirth());
+        jso.put("mobilephone", getMobilephone());
+        jso.put("address", getAddress());
+        jso.put("license", getLicense());
+        jso.put("email", getEmail());
         jso.put("login_times", getLoginTimes());
         jso.put("status", getStatus());
         
         return jso;
     }
-    
+    //IDNumber, password, name, birth, mobilephone, address, license, email
     /**
      * 取得資料庫內之更新資料時間分鐘數與會員組別
      *

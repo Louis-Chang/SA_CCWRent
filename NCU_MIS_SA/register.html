@@ -59,7 +59,7 @@
                 </div>                
                 <div class="input text required">
                     <label for="member_license">汽車駕照管轄編號</label>
-                    <input name="licence" maxlength="13" type="text" id="member_licence" required="required">
+                    <input name="license" maxlength="13" type="text" id="member_license" required="required">
                 </div>
                 <div class="input email required">
                     <label for="member_email">電郵</label>
@@ -126,7 +126,7 @@
                                     crossDomain: true,
                                     cache: false,
                                     dataType: 'json',
-                                    timeout: 5000,
+                                    timeout: 50000,
                                     success: function (response) {
                                         $('#flashMessage').html(response.message);
                                         $('#flashMessage').show();

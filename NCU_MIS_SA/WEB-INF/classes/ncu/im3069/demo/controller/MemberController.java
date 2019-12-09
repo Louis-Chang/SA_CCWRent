@@ -3,6 +3,7 @@ package ncu.im3069.demo.controller;
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
+import javax.servlet.annotation.WebServlet;
 import org.json.*;
 import ncu.im3069.demo.app.Member;
 import ncu.im3069.demo.app.MemberHelper;
@@ -19,7 +20,7 @@ import ncu.im3069.tools.JsonReader;
  * @version 1.0.0
  * @since 1.0.0
  */
-
+@WebServlet("/api/member.do")
 public class MemberController extends HttpServlet {
     
     /** The Constant serialVersionUID. */
@@ -59,6 +60,7 @@ public class MemberController extends HttpServlet {
         /** 建立一個新的會員物件 */
         Member m = new Member(IDNumber, password, name, birth, mobilephone, address, license, email);
         
+        //|| license.isEmpty()
         /** 後端檢查是否有欄位為空值，若有則回傳錯誤訊息 */
         if(IDNumber.isEmpty() || password.isEmpty() || name.isEmpty() || birth.isEmpty() || mobilephone.isEmpty() || address.isEmpty() || license.isEmpty() || email.isEmpty()) {
             /** 以字串組出JSON格式之資料 */

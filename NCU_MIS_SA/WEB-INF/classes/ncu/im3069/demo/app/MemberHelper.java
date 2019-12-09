@@ -484,18 +484,22 @@ public class MemberHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "Update `missa`.`members` SET `name` = ? ,`password` = ? , `modified` = ? WHERE `email` = ?";
+            //id, password, name, birth, mobilephone, address, license, email
+            String sql = "Update `missa`.`members` SET `password` = ? ,`mobilephone` = ? ,  `address` = ? , `modified` = ? WHERE `email` = ?";
             /** 取得所需之參數 */
-            String name = m.getName();
             String email = m.getEmail();
-            String password = m.getPassword();
+            String password = m.getPassword();            
+            String mobilephone = m.getMobilephone();
+            String address = m.getAddress();
+
             
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
-            pres.setString(1, name);
-            pres.setString(2, password);
-            pres.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
-            pres.setString(4, email);
+            pres.setString(1, password);
+            pres.setString(2, mobilephone);
+            pres.setString(3, address);
+            pres.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
+            pres.setString(5, email);
             /** 執行更新之SQL指令並記錄影響之行數 */
             row = pres.executeUpdate();
 

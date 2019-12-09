@@ -4,19 +4,25 @@ import org.json.*;
 
 public class Product {
 
-    /** id，會員編號 */
+    /** id，商品編號 */
     private int id;
 
-    /** id，會員編號 */
+    /** name，商品名稱 */
     private String name;
 
-    /** id，會員編號 */
+    /** price，商品價格 */
     private double price;
+    
+    /** price，商品價格 */
+    private int cc;
+    
+    /** price，商品價格 */
+    private int seat;
 
-    /** id，會員編號 */
+    /** image，商品圖片 */
     private String image;
 
-    /** id，會員編號 */
+    /** describe，商品敘述 */
 	private String describe;
 
     /**
@@ -37,9 +43,11 @@ public class Product {
      * @param price 產品價格
      * @param image 產品圖片
      */
-	public Product(String name, double price, String image) {
+	public Product(String name, double price, int cc , int seat , String image) {
 		this.name = name;
 		this.price = price;
+		this.cc = cc;
+		this.seat = seat;
 		this.image = image;
 	}
 
@@ -53,10 +61,12 @@ public class Product {
      * @param image 產品圖片
      * @param describe 產品敘述
      */
-	public Product(int id, String name, double price, String image, String describe) {
+	public Product(int id, String name, double price, int cc , int seat , String image, String describe) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
+		this.cc = cc;
+		this.seat = seat;
 		this.image = image;
 		this.describe = describe;
 	}
@@ -86,6 +96,24 @@ public class Product {
      */
 	public double getPrice() {
 		return this.price;
+	}
+	
+    /**
+     * 取得產品排氣量
+     *
+     * @return int 回傳產品排氣量
+     */
+	public int getCc() {
+		return this.cc;
+	}
+	
+    /**
+     * 取得產品座位數
+     *
+     * @return int 回傳產品座位數
+     */
+	public int getSeat() {
+		return this.seat;
 	}
 
     /**
@@ -117,6 +145,8 @@ public class Product {
         jso.put("id", getID());
         jso.put("name", getName());
         jso.put("price", getPrice());
+        jso.put("cc", getCc());
+        jso.put("seat", getSeat());
         jso.put("image", getImage());
         jso.put("describe", getDescribe());
 

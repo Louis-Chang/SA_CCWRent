@@ -61,11 +61,13 @@ public class ProductHelper {
                 int product_id = rs.getInt("id");
                 String name = rs.getString("name");
                 double price = rs.getDouble("price");
+                int cc = rs.getInt("cc");
+                int seat = rs.getInt("seat");
                 String image = rs.getString("image");
                 String describe = rs.getString("describe");
                 
                 /** 將每一筆商品資料產生一名新Product物件 */
-                p = new Product(product_id, name, price, image, describe);
+                p = new Product(product_id, name, price, cc, seat, image, describe);
                 /** 取出該項商品之資料並封裝至 JSONsonArray 內 */
                 jsa.put(p.getData());
             }
@@ -142,11 +144,13 @@ public class ProductHelper {
               int product_id = rs.getInt("id");
               String name = rs.getString("name");
               double price = rs.getDouble("price");
+              int cc = rs.getInt("cc");
+              int seat = rs.getInt("seat");
               String image = rs.getString("image");
               String describe = rs.getString("describe");
               
               /** 將每一筆商品資料產生一名新Product物件 */
-              p = new Product(product_id, name, price, image, describe);
+              p = new Product(product_id, name, price, cc, seat, image, describe);
               /** 取出該項商品之資料並封裝至 JSONsonArray 內 */
               jsa.put(p.getData());
           }
@@ -207,11 +211,13 @@ public class ProductHelper {
                 int product_id = rs.getInt("id");
                 String name = rs.getString("name");
                 double price = rs.getDouble("price");
+                int cc = rs.getInt("cc");
+                int seat = rs.getInt("seat");
                 String image = rs.getString("image");
                 String describe = rs.getString("describe");
                 
                 /** 將每一筆商品資料產生一名新Product物件 */
-                p = new Product(product_id, name, price, image, describe);
+                p = new Product(product_id, name, price, cc, seat, image, describe);
             }
 
         } catch (SQLException e) {

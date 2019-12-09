@@ -8,14 +8,14 @@
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Jekyll v3.8.5">
 
-  <title>商品列表 ｜ NCU MIS SA</title>
+  <title>租車列表 ｜ NCU MIS SA</title>
 
   <!-- Bootstrap core CSS -->
   <link href="statics/css/bootstrap.min.css" rel="stylesheet">
   <link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
   <link href="statics/icon/favicon.ico" type="image/x-icon" rel="shortcut icon">
 
-
+	
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -43,15 +43,15 @@
     <h5 class="my-0 mr-md-auto font-weight-normal">NCU_MIS-SA</h5>
     <nav class="my-2 my-md-0 mr-md-3">
       <a class="p-2 text-dark" href="index.html">會員管理模組</a>
-      <a class="p-2 text-dark" href="product.html">商品列表</a>
+      <a class="p-2 text-dark" href="product.html">租車列表</a>
       <a class="p-2 text-dark" href="order.html">訂單列表</a>
     </nav>
     <a class="btn btn-outline-primary" href="cart.html">購物車</a>
   </div>
 
   <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">商品列表</h1>
-    <p class="lead">以下是所有商品包含其ID、品名、價格與說明</p>
+    <h1 class="display-4">租車列表</h1>
+    <p class="lead">以下是所有租賃車輛，包含其品名、價格、排氣量、座位數等說明</p>
   </div>
 
   <div class="album py-5 bg-light">
@@ -71,7 +71,7 @@
         crossDomain: true,
         cache: false,
         dataType: 'json',
-        timeout: 5000,
+        timeout: 100000,
         success: function (response) {
           if (response.status == 200) {
         	var product_panel = '';
@@ -102,7 +102,8 @@
  		inner_html += '<div class="card mb-4 shadow-sm">';
  		inner_html += '<img src="statics/img/product/' + data.image + '" width="100%">';
 		inner_html += '<div class="card-body">';
-		inner_html += '<h1 class="card-title pricing-card-title">$' + data.price + ' <small class="text-muted">/ USD</small></h1>';
+		inner_html += '<h1 class="card-title pricing-card-title">$' + data.price + ' <small class="text-muted"> 元/日 </small></h1>';
+		inner_html += '<h5 class="card-text">排氣量:' + data.cc + 'CC' +'</h5>' + '<h5 class="card-text">' + '座位數:' + data.seat + '</h5>';
 		inner_html += '<p class="card-text">' + data.describe + '</p>';
 		inner_html += '<div class="d-flex justify-content-between align-items-center">';
 		inner_html += '<div class="btn-group">';
@@ -164,12 +165,12 @@
     	if (!action) {
     	    $('#' + id).prop('disabled', true);
     	    $('#' + id).addClass('disabled');
-    	    $('#' + id).html('已加入');
+    	    $('#' + id).html('已租賃');
     	}
     	else {
     		$('#' + id).prop('disabled', false);
     	    $('#' + id).removeClass('disabled');
-    	    $('#' + id).html('加入購物車');
+    	    $('#' + id).html('租賃');
     	}
     }
   </script>

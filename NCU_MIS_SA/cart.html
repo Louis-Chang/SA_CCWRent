@@ -108,6 +108,26 @@
 	          <label for="phonenum">手機號碼:</label><br/>
 	          <input id="phone" type="tel" class="form-control" maxlength="12" placeholder="09xx-xxx-xxx" required>
 	        </div>
+	        
+	       	<div class="mb-3">
+	          <label for="rentlocation">租賃地點:</label><br/>
+	          <input id="rentlocation" type="text" class="form-control" maxlength="255"required>
+	        </div>
+	        
+	        <div class="mb-3">
+	          <label for="backlocation">還車地點:</label><br/>
+	          <input id="backlocation" type="text" class="form-control" maxlength="255"required>
+	        </div>
+	        
+	       	<div class="mb-3">
+	          <label for="rentdate">租賃日期:</label><br/>
+	          <input id="rentdate" type="text" class="form-control" maxlength="255"required>
+	        </div>
+	        
+	       	<div class="mb-3">
+	          <label for="backdate">還車日期:</label><br/>
+	          <input id="backdate" type="text" class="form-control" maxlength="255"required>
+	        </div>	        
 
 	        <div class="mb-3">
 	          <label for="address">住址</label>
@@ -122,8 +142,8 @@
 			          <thead>
 			            <tr>
 			              <th class="text-center" style="width: 10%">商品編號</th>
-			              <th class="text-center" style="width: 30%">品名</th>
-			              <th class="text-center" style="width: 15%">單價</th>
+			              <th class="text-center" style="width: 25%">品名</th>
+			              <th class="text-center" style="width: 20%">單價</th>
 			              <th class="text-center" style="width: 10%">數量</th>
 			              <th class="text-center" style="width: 15%">小計</th>
 			              <th class="text-center" style="width: 10%">刪除</th>
@@ -156,6 +176,10 @@
     			"name": $("#name").val(),
     			"email": $("#email").val(),
     			"phone": $("#phone").val(),
+    			"rentlocation": $("#rentlocation").val(),
+    			"backlocation": $("#backlocation").val(),
+    			"rentdate": $("#rentdate").val(),
+    			"backdate": $("#backdate").val(),
     			"address": $("#address").val(),
     			"item": client_cart_obj,
     			"quantity": client_cart_amount

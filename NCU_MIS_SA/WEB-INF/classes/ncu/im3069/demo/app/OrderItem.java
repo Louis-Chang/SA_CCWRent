@@ -11,18 +11,6 @@ public class OrderItem {
     /** pd，產品 */
     private Product pd;
     
-    /** rentlocation，租借地點 */
-    private String rentlocation;
-    
-    /** backlocation，還車地點 */
-    private String backlocation;
-    
-    /** rentdate，租借日期 */
-    private String rentdate;
-
-    /** backdate，還車日期 */
-    private String backdate;
-    
     /** quantity，產品數量 */
     private int quantity;
 
@@ -60,12 +48,8 @@ public class OrderItem {
      * @param quantity 產品數量
      * @param subtotal 小計
      */
-    public OrderItem(int order_product_id, int order_id, int product_id, String rentlocation, String backlocation, String rentdate,  String backdate, double price, int quantity, double subtotal) {
+    public OrderItem(int order_product_id, int order_id, int product_id, double price, int quantity, double subtotal) {
         this.id = order_product_id;
-        this.rentlocation = rentlocation;
-        this.backlocation = backlocation;
-        this.rentdate = rentdate;
-        this.backdate = backdate;
         this.quantity = quantity;
         this.price = price;
         this.subtotal = subtotal;
@@ -105,41 +89,6 @@ public class OrderItem {
         return this.id;
     }
     
-    /**
-     * 取得租借地點
-     *
-     * @return String 回傳租借地點
-     */
-    public String getRentLocation() {
-        return this.rentlocation;
-    } 
-    
-    /**
-     * 取得還車地點
-     *
-     * @return String 回傳還車地點
-     */
-    public String getBackLocation() {
-        return this.backlocation;
-    } 
-    
-    /**
-     * 取得租借日期
-     *
-     * @return String 回傳租借日期
-     */
-    public String getRentDate() {
-        return this.rentdate;
-    } 
-    
-    /**
-     * 取得還車日期
-     *
-     * @return String 回傳還車日期
-     */
-    public String getBackDate() {
-        return this.backdate;
-    } 
 
     /**
      * 取得產品價格
@@ -177,10 +126,6 @@ public class OrderItem {
         JSONObject data = new JSONObject();
         data.put("id", getId());
         data.put("product", getProduct().getData());
-        data.put("rentlocation", getRentLocation());
-        data.put("backlocation", getBackLocation());
-        data.put("rentdate", getRentDate());
-        data.put("backdate", getBackDate());
         data.put("price", getPrice());
         data.put("quantity", getQuantity());
         data.put("subtotal", getSubTotal());

@@ -33,14 +33,18 @@ public class OrderHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "INSERT INTO `missa`.`orders`(`name`, `email`, `address`, `phone`, `create`, `modify`)"
-                    + " VALUES(?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO `missa`.`orders`(`name`, `email`, `address`, `phone`, `rentlocation`, `backlocation`, `rentdate`, `backdate`, `create`, `modify`)"
+                    + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             
             /** 取得所需之參數 */
             String name = order.getName();
             String email = order.getEmail();
             String address = order.getAddress();
             String phone = order.getPhone();
+            String rentlocation = order.getRentLocation();
+            String backlocation = order.getBackLocation();
+            String rentdate = order.getRentDate();
+            String backdate = order.getBackDate();
             Timestamp create = order.getCreateTime();
             Timestamp modify = order.getModifyTime();
             
@@ -50,8 +54,12 @@ public class OrderHelper {
             pres.setString(2, email);
             pres.setString(3, address);
             pres.setString(4, phone);
-            pres.setTimestamp(5, create);
-            pres.setTimestamp(6, modify);
+            pres.setString(5, rentlocation);
+            pres.setString(6, backlocation);
+            pres.setString(7, rentdate);
+            pres.setString(8, backdate);
+            pres.setTimestamp(9, create);
+            pres.setTimestamp(10, modify);
             
             /** 執行新增之SQL指令並記錄影響之行數 */
             pres.executeUpdate();
@@ -124,11 +132,15 @@ public class OrderHelper {
                 String email = rs.getString("email");
                 String address = rs.getString("address");
                 String phone = rs.getString("phone");
+                String rentlocation = rs.getString("rentlocation");
+                String backlocation = rs.getString("backlocation");
+                String rentdate = rs.getString("rentdate");
+                String backdate = rs.getString("backdate");
                 Timestamp create = rs.getTimestamp("create");
                 Timestamp modify = rs.getTimestamp("modify");
                 
                 /** 將每一筆商品資料產生一名新Product物件 */
-                o = new Order(id, name, email, address, phone, create, modify);
+                o = new Order(id, name, email, address, phone,  rentlocation, backlocation, rentdate, backdate, create, modify);
                 /** 取出該項商品之資料並封裝至 JSONsonArray 內 */
                 jsa.put(o.getOrderAllInfo());
             }
@@ -198,11 +210,15 @@ public class OrderHelper {
                 String email = rs.getString("email");
                 String address = rs.getString("address");
                 String phone = rs.getString("phone");
+                String rentlocation = rs.getString("rentlocation");
+                String backlocation = rs.getString("backlocation");
+                String rentdate = rs.getString("rentdate");
+                String backdate = rs.getString("backdate");
                 Timestamp create = rs.getTimestamp("create");
                 Timestamp modify = rs.getTimestamp("modify");
                 
                 /** 將每一筆商品資料產生一名新Product物件 */
-                o = new Order(id, name, email, address, phone, create, modify);
+                o = new Order(id, name, email, address, phone, rentlocation, backlocation, rentdate, backdate,  create, modify);
                 /** 取出該項商品之資料並封裝至 JSONsonArray 內 */
                 data = o.getOrderAllInfo();
             }

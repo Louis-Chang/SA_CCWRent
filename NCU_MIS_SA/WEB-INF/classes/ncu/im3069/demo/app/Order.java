@@ -22,6 +22,18 @@ public class Order {
 
     /** phone，會員手機 */
     private String phone;
+    
+    /** rentlocation，租借地點 */
+    private String rentlocation;
+    
+    /** backlocation，還車地點 */
+    private String backlocation;
+    
+    /** rentdate，租借日期 */
+    private String rentdate;
+
+    /** backdate，還車日期 */
+    private String backdate;
 
     /** list，訂單列表 */
     private ArrayList<OrderItem> list = new ArrayList<OrderItem>();
@@ -45,11 +57,15 @@ public class Order {
      * @param address 會員地址
      * @param phone 會員姓名
      */
-    public Order(String name, String email, String address, String phone) {
+    public Order(String name, String email, String address, String phone, String rentlocation, String backlocation, String rentdate,  String backdate) {
         this.name = name;
         this.email = email;
         this.address = address;
         this.phone = phone;
+        this.rentlocation = rentlocation;
+        this.backlocation = backlocation;
+        this.rentdate = rentdate;
+        this.backdate = backdate;
         this.create = Timestamp.valueOf(LocalDateTime.now());
         this.modify = Timestamp.valueOf(LocalDateTime.now());
     }
@@ -66,12 +82,16 @@ public class Order {
      * @param create 訂單創建時間
      * @param modify 訂單修改時間
      */
-    public Order(int id, String name, String email, String address, String phone, Timestamp create, Timestamp modify) {
+    public Order(int id, String name, String email, String address, String phone, String rentlocation, String backlocation, String rentdate,  String backdate, Timestamp create, Timestamp modify) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.address = address;
         this.phone = phone;
+        this.rentlocation = rentlocation;
+        this.backlocation = backlocation;
+        this.rentdate = rentdate;
+        this.backdate = backdate;
         this.create = create;
         this.modify = modify;
         getOrderProductFromDB();
@@ -161,6 +181,42 @@ public class Order {
     public String getPhone() {
         return this.phone;
     }
+    
+    /**
+     * 取得租借地點
+     *
+     * @return String 回傳租借地點
+     */
+    public String getRentLocation() {
+        return this.rentlocation;
+    } 
+    
+    /**
+     * 取得還車地點
+     *
+     * @return String 回傳還車地點
+     */
+    public String getBackLocation() {
+        return this.backlocation;
+    } 
+    
+    /**
+     * 取得租借日期
+     *
+     * @return String 回傳租借日期
+     */
+    public String getRentDate() {
+        return this.rentdate;
+    } 
+    
+    /**
+     * 取得還車日期
+     *
+     * @return String 回傳還車日期
+     */
+    public String getBackDate() {
+        return this.backdate;
+    } 
 
     /**
      * 取得該名會員所有資料
@@ -191,6 +247,10 @@ public class Order {
         jso.put("email", getEmail());
         jso.put("address", getAddress());
         jso.put("phone", getPhone());
+        jso.put("rentlocation", getRentLocation());
+        jso.put("backlocation", getBackLocation());
+        jso.put("rentdate", getRentDate());
+        jso.put("backdate", getBackDate());
         jso.put("create", getCreateTime());
         jso.put("modify", getModifyTime());
 

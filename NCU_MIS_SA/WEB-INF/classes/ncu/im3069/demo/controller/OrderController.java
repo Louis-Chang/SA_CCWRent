@@ -85,11 +85,15 @@ public class OrderController extends HttpServlet {
         String email = jso.getString("email");
         String address = jso.getString("address");
         String phone = jso.getString("phone");
+        String rentlocation = jso.getString("rentlocation");
+        String backlocation = jso.getString("backlocation");
+        String rentdate = jso.getString("rentdate");
+        String backdate = jso.getString("backdate");
         JSONArray item = jso.getJSONArray("item");
         JSONArray quantity = jso.getJSONArray("quantity");
 
         /** 建立一個新的訂單物件 */
-        Order od = new Order(name, email, address, phone);
+        Order od = new Order(name, email, address, phone,rentlocation,backlocation,rentdate,backdate);
 
         /** 將每一筆訂單細項取得出來 */
         for(int i=0 ; i < item.length() ; i++) {

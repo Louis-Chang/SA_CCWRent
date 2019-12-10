@@ -40,10 +40,6 @@ public class OrderItemHelper {
             
             /** 取得所需之參數 */
             int product_id = op.getProduct().getID();
-            String rentlocation = op.getRentLocation();
-            String backlocation = op.getBackLocation();
-            String rentdate = op.getRentDate();
-            String backdate = op.getBackDate();
             double price = op.getPrice();
             int quantity = op.getQuantity();
             double subtotal = op.getSubTotal();
@@ -52,20 +48,16 @@ public class OrderItemHelper {
                 /** 取得資料庫之連線 */
                 conn = DBMgr.getConnection();
                 /** SQL指令 */
-                String sql = "INSERT INTO `missa`.`order_product`(`order_id`, `product_id`, `rentlocation`, `backlocation`, `rentdate`, `backdate`, `price`, `quantity`, `subtotal`)"
-                        + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO `missa`.`order_product`(`order_id`, `product_id`, `price`, `quantity`, `subtotal`)"
+                        + " VALUES(?, ?, ?, ?, ?)";
                 
                 /** 將參數回填至SQL指令當中 */
                 pres = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 pres.setLong(1, order_id);
                 pres.setInt(2, product_id);
-                pres.setString(3, rentlocation);
-                pres.setString(4, backlocation);
-                pres.setString(5, rentdate);
-                pres.setString(6, backdate);
-                pres.setDouble(7, price);
-                pres.setInt(8, quantity);
-                pres.setDouble(9, subtotal);
+                pres.setDouble(3, price);
+                pres.setInt(4, quantity);
+                pres.setDouble(5, subtotal);
                 
                 /** 執行新增之SQL指令並記錄影響之行數 */
                 pres.executeUpdate();
@@ -125,16 +117,12 @@ public class OrderItemHelper {
                 /** 將 ResultSet 之資料取出 */
                 int order_product_id = rs.getInt("id");
                 int product_id = rs.getInt("product_id");
-                String rentlocation = rs.getString("rentlocation");
-                String backlocation = rs.getString("backlocation");
-                String rentdate = rs.getString("rentdate");
-                String backdate = rs.getString("backdate");
                 double price = rs.getDouble("price");
                 int quantity = rs.getInt("quantity");
                 double subtotal = rs.getDouble("subtotal");
                 
                 /** 將每一筆會員資料產生一名新Member物件 */
-                op = new OrderItem(order_product_id, order_id, product_id, rentlocation, backlocation, rentdate, backdate, price, quantity, subtotal);
+                op = new OrderItem(order_product_id, order_id, product_id, price, quantity, subtotal);
                 /** 取出該名會員之資料並封裝至 JSONsonArray 內 */
                 result.add(op);
             }

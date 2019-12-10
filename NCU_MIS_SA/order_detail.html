@@ -111,6 +111,34 @@
          
          <div class="media text-muted pt-3">
            <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+             <strong class="d-block text-gray-dark">租賃地點</strong>
+             <span id="rentlocation">{{rentlocation}}</span>
+           </p>
+         </div>
+         
+         <div class="media text-muted pt-3">
+           <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+             <strong class="d-block text-gray-dark">還車地點</strong>
+             <span id="backlocation">{{backlocation}}</span>
+           </p>
+         </div>
+         
+         <div class="media text-muted pt-3">
+           <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+             <strong class="d-block text-gray-dark">租賃日期</strong>
+             <span id="rentdate">{{rentdate}}</span>
+           </p>
+         </div>
+         
+         <div class="media text-muted pt-3">
+           <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+             <strong class="d-block text-gray-dark">還車日期</strong>
+             <span id="backdate">{{backdate}}</span>
+           </p>
+         </div>
+         
+         <div class="media text-muted pt-3">
+           <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
              <strong class="d-block text-gray-dark">住址</strong>
              <span id="address">{{address}}</span>
            </p>
@@ -187,6 +215,10 @@
 	  $("#create").html(data['order_info']['create']);
 	  $("#modify").html(data['order_info']['modify']);
 	  $("#email").html(data['order_info']['email']);
+	  $("#rentlocation").html(data['order_info']['rentlocation']);
+	  $("#backlocation").html(data['order_info']['backlocation']);
+	  $("#rentdate").html(data['order_info']['rentdate']);
+	  $("#backdate").html(data['order_info']['backdate']);
 	  $("#address").html(data['order_info']['address']);
 	  $("#phone").html(data['order_info']['phone']);
 	  $("#name").html(data['order_info']['name']);

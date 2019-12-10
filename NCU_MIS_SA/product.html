@@ -46,7 +46,7 @@
       <a class="p-2 text-dark" href="product.html">租車列表</a>
       <a class="p-2 text-dark" href="order.html">訂單列表</a>
     </nav>
-    <a class="btn btn-outline-primary" href="cart.html">購物車</a>
+    <a class="btn btn-outline-primary" href="cart.html">結帳</a>
   </div>
 
   <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
@@ -166,6 +166,8 @@
     	    $('#' + id).prop('disabled', true);
     	    $('#' + id).addClass('disabled');
     	    $('#' + id).html('已租賃');
+    	    window.location.replace("http://localhost:8090/NCU_MIS_SA/cart.html");
+    	    alert("一隻帳號只能訂購一台車輛哦~前往結帳！")
     	}
     	else {
     		$('#' + id).prop('disabled', false);

@@ -47,10 +47,10 @@
     <h5 class="my-0 mr-md-auto font-weight-normal">NCU_MIS-SA</h5>
     <nav class="my-2 my-md-0 mr-md-3">
       <a class="p-2 text-dark" href="index.html">會員管理模組</a>
-      <a class="p-2 text-dark" href="product.html">商品列表</a>
+      <a class="p-2 text-dark" href="product.html">車輛列表</a>
       <a class="p-2 text-dark" href="order.html">訂單列表</a>
     </nav>
-    <a class="btn btn-outline-primary" href="cart.html">購物車</a>
+    <a class="btn btn-outline-primary" href="cart.html">結帳</a>
   </div>
 
   <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center bg-light">
@@ -90,7 +90,7 @@
            <div class="col media text-muted pt-3">
              <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
                <strong class="d-block text-gray-dark">姓名</strong>
-               <span id="last_name" class="p-2">{{last_name}}</span><span id="first_name">{{first_name}}</span>
+               <span id="name" class="p-2">{{name}}</span>
              </p>
            </div>
            
@@ -107,6 +107,34 @@
               <span id="email">{{email}}</span>
             </p>
           </div>
+         </div>
+         
+         <div class="media text-muted pt-3">
+           <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+             <strong class="d-block text-gray-dark">租賃地點</strong>
+             <span id="rentlocation">{{rentlocation}}</span>
+           </p>
+         </div>
+         
+         <div class="media text-muted pt-3">
+           <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+             <strong class="d-block text-gray-dark">還車地點</strong>
+             <span id="backlocation">{{backlocation}}</span>
+           </p>
+         </div>
+         
+         <div class="media text-muted pt-3">
+           <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+             <strong class="d-block text-gray-dark">租賃日期</strong>
+             <span id="rentdate">{{rentdate}}</span>
+           </p>
+         </div>
+         
+         <div class="media text-muted pt-3">
+           <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+             <strong class="d-block text-gray-dark">還車日期</strong>
+             <span id="backdate">{{backdate}}</span>
+           </p>
          </div>
          
          <div class="media text-muted pt-3">
@@ -168,7 +196,7 @@
           crossDomain: true,
           cache: false,
           dataType: 'json',
-          timeout: 5000,
+          timeout: 100000,
           success: function (response) {
               if(response.status == 200){
             	  updateHTML(response.response.data);
@@ -187,10 +215,13 @@
 	  $("#create").html(data['order_info']['create']);
 	  $("#modify").html(data['order_info']['modify']);
 	  $("#email").html(data['order_info']['email']);
+	  $("#rentlocation").html(data['order_info']['rentlocation']);
+	  $("#backlocation").html(data['order_info']['backlocation']);
+	  $("#rentdate").html(data['order_info']['rentdate']);
+	  $("#backdate").html(data['order_info']['backdate']);
 	  $("#address").html(data['order_info']['address']);
 	  $("#phone").html(data['order_info']['phone']);
-	  $("#first_name").html(data['order_info']['first_name']);
-	  $("#last_name").html(data['order_info']['last_name']);
+	  $("#name").html(data['order_info']['name']);
 	  $("#item").html(data.product_info.length);
 	  
 	  var total_price = Big(0.0);

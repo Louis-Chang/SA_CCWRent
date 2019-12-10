@@ -12,10 +12,7 @@ public class Order {
     private int id;
 
     /** first_name，會員姓名 */
-    private String first_name;
-
-    /** last_name，會員姓 */
-    private String last_name;
+    private String name;
 
     /** email，會員電子郵件信箱 */
     private String email;
@@ -25,6 +22,18 @@ public class Order {
 
     /** phone，會員手機 */
     private String phone;
+    
+    /** rentlocation，租借地點 */
+    private String rentlocation;
+    
+    /** backlocation，還車地點 */
+    private String backlocation;
+    
+    /** rentdate，租借日期 */
+    private String rentdate;
+
+    /** backdate，還車日期 */
+    private String backdate;
 
     /** list，訂單列表 */
     private ArrayList<OrderItem> list = new ArrayList<OrderItem>();
@@ -48,12 +57,15 @@ public class Order {
      * @param address 會員地址
      * @param phone 會員姓名
      */
-    public Order(String first_name, String last_name, String email, String address, String phone) {
-        this.first_name = first_name;
-        this.last_name = last_name;
+    public Order(String name, String email, String address, String phone, String rentlocation, String backlocation, String rentdate,  String backdate) {
+        this.name = name;
         this.email = email;
         this.address = address;
         this.phone = phone;
+        this.rentlocation = rentlocation;
+        this.backlocation = backlocation;
+        this.rentdate = rentdate;
+        this.backdate = backdate;
         this.create = Timestamp.valueOf(LocalDateTime.now());
         this.modify = Timestamp.valueOf(LocalDateTime.now());
     }
@@ -70,13 +82,16 @@ public class Order {
      * @param create 訂單創建時間
      * @param modify 訂單修改時間
      */
-    public Order(int id, String first_name, String last_name, String email, String address, String phone, Timestamp create, Timestamp modify) {
+    public Order(int id, String name, String email, String address, String phone, String rentlocation, String backlocation, String rentdate,  String backdate, Timestamp create, Timestamp modify) {
         this.id = id;
-        this.first_name = first_name;
-        this.last_name = last_name;
+        this.name = name;
         this.email = email;
         this.address = address;
         this.phone = phone;
+        this.rentlocation = rentlocation;
+        this.backlocation = backlocation;
+        this.rentdate = rentdate;
+        this.backdate = backdate;
         this.create = create;
         this.modify = modify;
         getOrderProductFromDB();
@@ -113,22 +128,14 @@ public class Order {
     }
 
     /**
-     * 取得訂單會員的名
+     * 取得訂單會員的姓名
      *
-     * @return String 回傳訂單會員的名
+     * @return String 回傳訂單會員的姓名
      */
-    public String getFirstName() {
-        return this.first_name;
+    public String getName() {
+        return this.name;
     }
 
-    /**
-     * 取得訂單會員的姓
-     *
-     * @return String 回傳訂單會員的姓
-     */
-    public String getLastName() {
-        return this.last_name;
-    }
 
     /**
      * 取得訂單信箱
@@ -174,6 +181,42 @@ public class Order {
     public String getPhone() {
         return this.phone;
     }
+    
+    /**
+     * 取得租借地點
+     *
+     * @return String 回傳租借地點
+     */
+    public String getRentLocation() {
+        return this.rentlocation;
+    } 
+    
+    /**
+     * 取得還車地點
+     *
+     * @return String 回傳還車地點
+     */
+    public String getBackLocation() {
+        return this.backlocation;
+    } 
+    
+    /**
+     * 取得租借日期
+     *
+     * @return String 回傳租借日期
+     */
+    public String getRentDate() {
+        return this.rentdate;
+    } 
+    
+    /**
+     * 取得還車日期
+     *
+     * @return String 回傳還車日期
+     */
+    public String getBackDate() {
+        return this.backdate;
+    } 
 
     /**
      * 取得該名會員所有資料
@@ -200,11 +243,14 @@ public class Order {
     public JSONObject getOrderData() {
         JSONObject jso = new JSONObject();
         jso.put("id", getId());
-        jso.put("first_name", getFirstName());
-        jso.put("last_name", getLastName());
+        jso.put("name", getName());
         jso.put("email", getEmail());
         jso.put("address", getAddress());
         jso.put("phone", getPhone());
+        jso.put("rentlocation", getRentLocation());
+        jso.put("backlocation", getBackLocation());
+        jso.put("rentdate", getRentDate());
+        jso.put("backdate", getBackDate());
         jso.put("create", getCreateTime());
         jso.put("modify", getModifyTime());
 

@@ -46,15 +46,15 @@
     <h5 class="my-0 mr-md-auto font-weight-normal">NCU_MIS-SA</h5>
     <nav class="my-2 my-md-0 mr-md-3">
       <a class="p-2 text-dark" href="index.html">會員管理模組</a>
-      <a class="p-2 text-dark" href="product.html">商品列表</a>
+      <a class="p-2 text-dark" href="product.html">車輛列表</a>
       <a class="p-2 text-dark" href="order.html">訂單列表</a>
     </nav>
-    <a class="btn btn-outline-primary" href="cart.html">購物車</a>
+    <a class="btn btn-outline-primary" href="cart.html">結帳</a>
   </div>
 
   <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center bg-light">
-    <h1 class="display-4">購物車</h1>
-    <p class="lead">以下是目前存在於購物車之商品，請輸入訂單相關資訊後即可送出訂單！</p>
+    <h1 class="display-4">結帳</h1>
+    <p class="lead">以下是選擇租賃之車輛，請輸入訂單相關資訊後即可送出訂單！</p>
   </div>
 
   <div class="container">
@@ -86,7 +86,7 @@
 		        </li>
 		      </ul>
 		      <button id="check" class="btn btn-primary btn-lg btn-block" type="button">結帳</button>
-		      <button id="clean" class="btn btn-dark btn-lg btn-block" type="button">清空購物車</button>
+		      <button id="clean" class="btn btn-dark btn-lg btn-block" type="button">清空租賃車輛</button>
 		    </div>
 
 		    <div class="col-md-8 order-md-1">
@@ -94,13 +94,8 @@
 		      <hr class="mb-4">
 	        <div class="row">
 	          <div class="col-md-6 mb-2">
-	            <label for="lastName">姓</label>
-	            <input type="text" class="form-control" id="last_name" maxlength="10" value="" required>
-	          </div>
-
-	          <div class="col-md-6 mb-4">
-	            <label for="firstName">名</label>
-	            <input type="text" class="form-control" id="first_name" maxlength="10" placeholder="" value="" required>
+	            <label for="name">姓名</label>
+	            <input type="text" class="form-control" id="name" maxlength="10" value="" required>
 	          </div>
 	        </div>
 
@@ -113,6 +108,26 @@
 	          <label for="phonenum">手機號碼:</label><br/>
 	          <input id="phone" type="tel" class="form-control" maxlength="12" placeholder="09xx-xxx-xxx" required>
 	        </div>
+	        
+	       	<div class="mb-3">
+	          <label for="rentlocation">租賃地點:</label><br/>
+	          <input id="rentlocation" type="text" class="form-control" maxlength="255"required>
+	        </div>
+	        
+	        <div class="mb-3">
+	          <label for="backlocation">還車地點:</label><br/>
+	          <input id="backlocation" type="text" class="form-control" maxlength="255"required>
+	        </div>
+	        
+	       	<div class="mb-3">
+	          <label for="rentdate">租賃日期:</label><br/>
+	          <input id="rentdate" type="text" class="form-control" maxlength="255"required>
+	        </div>
+	        
+	       	<div class="mb-3">
+	          <label for="backdate">還車日期:</label><br/>
+	          <input id="backdate" type="text" class="form-control" maxlength="255"required>
+	        </div>	        
 
 	        <div class="mb-3">
 	          <label for="address">住址</label>
@@ -127,8 +142,8 @@
 			          <thead>
 			            <tr>
 			              <th class="text-center" style="width: 10%">商品編號</th>
-			              <th class="text-center" style="width: 30%">品名</th>
-			              <th class="text-center" style="width: 15%">單價</th>
+			              <th class="text-center" style="width: 25%">品名</th>
+			              <th class="text-center" style="width: 20%">單價</th>
 			              <th class="text-center" style="width: 10%">數量</th>
 			              <th class="text-center" style="width: 15%">小計</th>
 			              <th class="text-center" style="width: 10%">刪除</th>
@@ -149,7 +164,7 @@
     var [client_cart_obj, client_cart_amount]  = getCartDataFromClient();
 
     if (client_cart_obj.length == 0) {
-    	alert("購物車沒有任何商品！");
+    	alert("沒有選擇租賃車輛！");
     	calcSummaryInformation();
     	setButtonState("check", false);
     }
@@ -158,10 +173,13 @@
 
     $("#check").click(function () {
     	var data = {
-    			"first_name": $("#first_name").val(),
-    			"last_name": $("#last_name").val(),
+    			"name": $("#name").val(),
     			"email": $("#email").val(),
     			"phone": $("#phone").val(),
+    			"rentlocation": $("#rentlocation").val(),
+    			"backlocation": $("#backlocation").val(),
+    			"rentdate": $("#rentdate").val(),
+    			"backdate": $("#backdate").val(),
     			"address": $("#address").val(),
     			"item": client_cart_obj,
     			"quantity": client_cart_amount
@@ -180,7 +198,7 @@
           crossDomain: true,
           cache: false,
           dataType: 'json',
-          timeout: 5000,
+          timeout: 100000,
           success: function (response) {
               if(response.status == 200){
               	$.confirm({
@@ -246,7 +264,7 @@
         cache: false,
         data: "id_list=" + client_cart_obj.toString(),
         dataType: 'json',
-        timeout: 5000,
+        timeout: 100000,
         success: function (response) {
           if (response.status == 200) {
         	  updateCartTable(response.response.data);
@@ -391,7 +409,7 @@
       if (!action) {
           $('#' + id).prop('disabled', true);
           $('#' + id).addClass('disabled');
-          $('#' + id).html('請先新增商品');
+          $('#' + id).html('請先選擇租賃車輛');
       }
       else {
     	  $('#' + id).prop('disabled', false);

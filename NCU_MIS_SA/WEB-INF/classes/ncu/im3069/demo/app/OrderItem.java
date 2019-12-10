@@ -10,7 +10,7 @@ public class OrderItem {
 
     /** pd，產品 */
     private Product pd;
-
+    
     /** quantity，產品數量 */
     private int quantity;
 
@@ -88,6 +88,7 @@ public class OrderItem {
     public int getId() {
         return this.id;
     }
+    
 
     /**
      * 取得產品價格

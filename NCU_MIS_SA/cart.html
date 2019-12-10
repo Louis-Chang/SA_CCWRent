@@ -94,13 +94,8 @@
 		      <hr class="mb-4">
 	        <div class="row">
 	          <div class="col-md-6 mb-2">
-	            <label for="lastName">姓</label>
-	            <input type="text" class="form-control" id="last_name" maxlength="10" value="" required>
-	          </div>
-
-	          <div class="col-md-6 mb-4">
-	            <label for="firstName">名</label>
-	            <input type="text" class="form-control" id="first_name" maxlength="10" placeholder="" value="" required>
+	            <label for="name">姓名</label>
+	            <input type="text" class="form-control" id="name" maxlength="10" value="" required>
 	          </div>
 	        </div>
 
@@ -149,7 +144,7 @@
     var [client_cart_obj, client_cart_amount]  = getCartDataFromClient();
 
     if (client_cart_obj.length == 0) {
-    	alert("購物車沒有任何商品！");
+    	alert("沒有選擇租賃車輛！");
     	calcSummaryInformation();
     	setButtonState("check", false);
     }
@@ -158,8 +153,7 @@
 
     $("#check").click(function () {
     	var data = {
-    			"first_name": $("#first_name").val(),
-    			"last_name": $("#last_name").val(),
+    			"name": $("#name").val(),
     			"email": $("#email").val(),
     			"phone": $("#phone").val(),
     			"address": $("#address").val(),
@@ -180,7 +174,7 @@
           crossDomain: true,
           cache: false,
           dataType: 'json',
-          timeout: 5000,
+          timeout: 100000,
           success: function (response) {
               if(response.status == 200){
               	$.confirm({
@@ -246,7 +240,7 @@
         cache: false,
         data: "id_list=" + client_cart_obj.toString(),
         dataType: 'json',
-        timeout: 5000,
+        timeout: 100000,
         success: function (response) {
           if (response.status == 200) {
         	  updateCartTable(response.response.data);

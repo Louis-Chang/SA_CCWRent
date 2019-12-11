@@ -22,7 +22,7 @@ public class DBMgr {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
 
     /** DB_URL常數，指定資料庫所在之IP或網域、Port號碼與指定所要使用資料庫 */
-    static final String DB_URL = "jdbc:mysql://missa.crhuzzrf1l0e.ap-southeast-1.rds.amazonaws.com:3306/missa?allowPublicKeyRetrieval=true&useSSL=false";
+    static final String DB_URL = "jdbc:mysql://missa.cwihiciexq0h.ap-northeast-1.rds.amazonaws.com:3306/missa?allowPublicKeyRetrieval=true&useSSL=false";
 
     /** USER常數，所要使用之資料庫使用者帳號 */
     static final String USER = "admin";

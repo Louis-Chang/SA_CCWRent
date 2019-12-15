@@ -7,137 +7,113 @@
 <html>
 
 <head>
-    <title>車輛資訊</title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700,500,900' rel='stylesheet' type='text/css'>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="js/skel.min.js"></script>
-    <script src="js/skel-panels.min.js"></script>
-    <script src="js/init.js"></script>
-    <noscript>
-			<link rel="stylesheet" href="css/skel-noscript.css" />
-			<link rel="stylesheet" href="css/style.css" />
-			<link rel="stylesheet" href="css/style-desktop.css" />
-		</noscript>
+<title>車輛資訊</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link
+	href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700,500,900'
+	rel='stylesheet' type='text/css'>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="js/skel.min.js"></script>
+<script src="js/skel-panels.min.js"></script>
+<script src="js/init.js"></script>
+<noscript>
+	<link rel="stylesheet" href="css/skel-noscript.css" />
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/style-desktop.css" />
+</noscript>
+<script src="statics/js/jquery-3.4.1.min.js"></script>
 </head>
 
 <body>
 
-    <!-- Header -->
-    <div id="header">
-        <div id="nav-wrapper">
-            <!-- Nav -->
-            <nav id="nav">
-                <ul>
-                    <li class="active"><a href="new_index.html">首頁</a></li>
-                    <li><a href="new_about.html">關於CCW Rent</a></li>
-                    <li><a href="new_cars.html">車輛資訊</a></li>
-                    <li><a href="new_store.html">據點查詢</a></li>
-                    <li><a href="new_notice.html">注意事項</a></li>
-                </ul>
-                <input type="button" onclick="javascript:location.href='login.html'" value="Login" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
-            </nav>
-        </div>
-        <div class="container">
+	<!-- Header -->
+	<div id="header">
+		<div id="nav-wrapper">
+			<!-- Nav -->
+			<nav id="nav">
+				<ul>
+					<li class="active"><a href="new_index.html">首頁</a></li>
+					<li><a href="new_about.html">關於CCW Rent</a></li>
+					<li><a href="new_cars.html">車輛資訊</a></li>
+					<li><a href="new_store.html">據點查詢</a></li>
+					<li><a href="new_notice.html">注意事項</a></li>
+				</ul>
+				<input type="button" onclick="javascript:location.href='login.html'"
+					value="Login"
+					style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
+			</nav>
+		</div>
+		<div class="container">
 
-            <!-- Logo -->
-            <div id="logo">
-                <a href="#" style="color: rgba(0, 0, 0, 0);">CCW RENT</a>
-            </div>
-        </div>
-    </div>
-    <!-- Header -->
+			<!-- Logo -->
+			<div id="logo">
+				<a href="#" style="color: rgba(0, 0, 0, 0);">CCW RENT</a>
+			</div>
+		</div>
+	</div>
+	<!-- Header -->
 
-    <!-- Main -->
-    <div id="main">
-        <div id="content" class="container">
-            <section>
-                <header>
-                    <h2><a href="index.html">首頁</a>／車輛資訊</h2>
-                </header>
+	<!-- Main -->
+	<div id="main">
+		<div id="content" class="container">
+			<section>
+				<header>
+					<h2>
+						<a href="index.html">首頁</a>／車輛資訊
+					</h2>
+				</header>
 
-                <body>
-                    搜尋車輛：<input type="text" style="font-size: 16px;">
-                    <input type="button" value="送出" height="30px" width="50px" style="font-size: 30px;">
-                    <div id="content" class="container">
-                        <div class="row">
-                            <section class="6u">
-                                <a href="#" class="image full"><img src="images/86_2000_2.png" height="270px" alt=""></a>
-                                <header>
-                                    <h2>Toyota 86</h2>
-                                </header>
-                                <input type="button" onclick="javascript:location.href=''" value="查看更多" style="position: relative; color: white; display: inline-block; background: #80BA8E;">
-                                <input type="button" onclick="javascript:location.href=''" value="我要租車" style="position: relative; color: white; display: inline-block; background: #80BA8E;">
-                            </section>
-                            <section class="6u">
-                                <a href="#" class="image full"><img src="images/GTR_3800_2.png" height="270px" alt=""></a>
-                                <header>
-                                    <h2>Nissan GTR</h2>
-                                </header>
-                                <input type="button" onclick="javascript:location.href=''" value="查看更多" style="position: relative; color: white; display: inline-block; background: #80BA8E;">
-                                <input type="button" onclick="javascript:location.href=''" value="我要租車" style="position: relative; color: white; display: inline-block; background: #80BA8E;">
-                            </section>
-                        </div>
+				<body>
+					搜尋車輛：
+					<input type="text" style="font-size: 16px;">
+					<input type="button" value="送出" height="30px" width="50px"
+						style="font-size: 30px;">
+					<div id="product_panel" class="row"></div>
+		</div>
+		
+	</body>
 
-                        <div class="row">
-                            <section class="6u">
-                                <a href="#" class="image full"><img src="images/ALTIMA_2000_5.png" height="270px" alt=""></a>
-                                <header>
-                                    <h2>Nissan ALTIMA</h2>
-                                </header>
-                                <input type="button" onclick="javascript:location.href=''" value="查看更多" style="position: relative; color: white; display: inline-block; background: #80BA8E;">
-                                <input type="button" onclick="javascript:location.href=''" value="我要租車" style="position: relative; color: white; display: inline-block; background: #80BA8E;">
-                            </section>
-                            <section class="6u">
-                                <a href="#" class="image full"><img src="images/RAV4_2000_5.png" height="270px" alt=""></a>
-                                <header>
-                                    <h2>Toyota RAV4</h2>
-                                </header>
-                                <input type="button" onclick="javascript:location.href=''" value="查看更多" style="position: relative; color: white; display: inline-block; background: #80BA8E;">
-                                <input type="button" onclick="javascript:location.href=''" value="我要租車" style="position: relative; color: white; display: inline-block; background: #80BA8E;">
-                            </section>
-                        </div>
-                    </div>
-        </div>
+</section>
+</div>
+</div>
+<!-- /Main -->
 
-        </body>
+<!-- Tweet -->
+<div id="tweet">
+	<div class="container" style="color: white; font-size: 20px;">
+		<section>
+			<p>
+				全台據點隨你搜<br>現在就來CCW RENT一下吧
+			</p>
+		</section>
+	</div>
+</div>
+<!-- /Tweet -->
 
-        </section>
-    </div>
-    </div>
-    <!-- /Main -->
+<!-- Footer -->
+<div id="footer">
+	<div class="container">
+		<section>
+			<header>
+				<h2>
+					聯絡方式： <a href="tel:+886-975-3760458">0975376458</a>
+				</h2>
+			</header>
+			<ul class="contact">
+				<li><a href="#" class="fa fa-twitter"><span>Twitter</span></a></li>
+				<li class="active"><a href="#" class="fa fa-facebook"><span>Facebook</span></a></li>
+				<li><a href="#" class="fa fa-dribbble"><span>Pinterest</span></a></li>
+				<li><a href="#" class="fa fa-tumblr"><span>Google+</span></a></li>
+			</ul>
+		</section>
+	</div>
+</div>
 
-    <!-- Tweet -->
-    <div id="tweet">
-        <div class="container" style="color: white; font-size: 20px;">
-            <section>
-                <p>全台據點隨你搜<br>現在就來CCW RENT一下吧</p>
-            </section>
-        </div>
-    </div>
-    <!-- /Tweet -->
-
-    <!-- Footer -->
-    <div id="footer">
-        <div class="container">
-            <section>
-                <header>
-                    <h2>聯絡方式： <a href="tel:+886-975-3760458">0975376458</a></h2>
-                </header>
-                <ul class="contact">
-                    <li><a href="#" class="fa fa-twitter"><span>Twitter</span></a></li>
-                    <li class="active"><a href="#" class="fa fa-facebook"><span>Facebook</span></a></li>
-                    <li><a href="#" class="fa fa-dribbble"><span>Pinterest</span></a></li>
-                    <li><a href="#" class="fa fa-tumblr"><span>Google+</span></a></li>
-                </ul>
-            </section>
-        </div>
-    </div>
-
-    <!-- Copyright -->
-    <!--div id="copyright">
+<!-- Copyright -->
+<!--div id="copyright">
 			<div class="container">
 				服務專線 0975376458
 			</div>
@@ -145,4 +121,119 @@
 
 
 </body>
+<script>   
+    var [client_cart_obj, client_cart_amount]  = getCartDataFromClient();
+    
+    function getAllProduct() {
+      $.ajax({
+        type: "GET",
+        url: "api/product.do",
+        crossDomain: true,
+        cache: false,
+        dataType: 'json',
+        timeout: 100000,
+        success: function (response) {
+          if (response.status == 200) {
+        	var product_panel = '';
+        	
+        	$.each(response.response.data, function (){
+        		product_panel += addProduct(this);
+        	})
+        	
+        	$("#product_panel").append(product_panel);
+        	setButtonFunction();
+        	checkIfExistInCart();
+          }
+        },
+        error: function () {
+          alert("無法連線到伺服器！");
+        }
+      });
+    }
+
+    getAllProduct();
+    
+    function addProduct(data) {
+    	let inner_html = '';
+    	inner_html += '<div class="col-md-4">';
+   		inner_html += '<div class="card-header">';
+   		inner_html += '<h4 class="font-weight-normal text-center text-truncate">' + data.name + '</h4>';
+ 		inner_html += '</div>';
+ 		inner_html += '<div class="card mb-4 shadow-sm">';
+ 		inner_html += '<img src="statics/img/product/' + data.image + '" width="100%">';
+		inner_html += '<div class="card-body">';
+		inner_html += '<h1 class="card-title pricing-card-title">$' + data.price + ' <small class="text-muted"> 元/日 </small></h1>';
+		inner_html += '<h5 class="card-text">排氣量:' + data.cc + 'CC' +'</h5>' + '<h5 class="card-text">' + '座位數:' + data.seat + '</h5>';
+		inner_html += '<p class="card-text">' + data.describe + '</p>';
+		inner_html += '<div class="d-flex justify-content-between align-items-center">';
+		inner_html += '<div class="btn-group">';
+		inner_html += '<button id="add_cart_' + data.id + '" name="add_cart" type="button" class="btn btn-lg btn-block btn-outline-primary">加入購物車</button>';
+		inner_html += '</div><small class="text-muted">id: ' + data.id + '</small>';
+		inner_html += '</div></div></div></div>';
+    	
+		return inner_html;
+    }
+    
+    function setButtonFunction() {
+    	$('button[name="add_cart"]').click(function () {
+    		var action = (this.id).split('_')[0];
+    		var destination = (this.id).split('_')[1];
+    		var id = (this.id).split('_')[2];
+    		addProductToCart(id, 1);
+        });
+    }
+    
+    function getCartDataFromClient() {
+    	let cart = JSON.parse(localStorage.getItem("client_cart_obj"));
+    	let amount = JSON.parse(localStorage.getItem("client_cart_amount"));
+    	cart = !cart ? new Array() : cart;
+    	amount = !amount ? new Array() : amount;
+    	return [cart, amount];
+    }
+    
+    function addProductToCart(id, amount) {
+    	if (!(client_cart_obj.includes(id))) {
+    		client_cart_obj.push(id);
+    		client_cart_amount.push(amount);
+    		updateCartDataToClent();
+    	}
+    	
+    	checkIfExistInCart();
+    }
+    
+    function updateCartDataToClent() {
+    	localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
+    	localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
+    }
+    
+    function checkIfExistInCart() {
+    	$('button[name="add_cart"]').each(function (){
+    		var action = (this.id).split('_')[0];
+    		var destination = (this.id).split('_')[1];
+    		var id = (this.id).split('_')[2];
+    		if (client_cart_obj.includes(id)) {
+    			setButtonState(this.id, false);
+    		}
+    		else {
+    			setButtonState(this.id, true);
+    		}
+    		
+        });
+    }
+    
+    function setButtonState(id, action) {
+    	if (!action) {
+    	    $('#' + id).prop('disabled', true);
+    	    $('#' + id).addClass('disabled');
+    	    $('#' + id).html('已租賃');
+    	    //window.location.replace("http://localhost:8090/NCU_MIS_SA/cart.html");
+    	    alert("一隻帳號只能訂購一台車輛哦~前往結帳！")
+    	}
+    	else {
+    		$('#' + id).prop('disabled', false);
+    	    $('#' + id).removeClass('disabled');
+    	    $('#' + id).html('租賃');
+    	}
+    }
+  </script>
 </html>

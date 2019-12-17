@@ -67,10 +67,6 @@
 				</header>
 
 				<body>
-					搜尋車輛：
-					<input type="text" style="font-size: 16px;">
-					<input type="button" value="送出" height="30px" width="50px"
-						style="font-size: 30px;">
 					<div id="product_panel" class="row"></div>
 		</div>
 		
@@ -226,7 +222,6 @@
     	    $('#' + id).prop('disabled', true);
     	    $('#' + id).addClass('disabled');
     	    $('#' + id).html('已租賃');
-    	    alert("只能訂購一輛車輛哦~結帳去！！！")
     	    window.location.replace("http://localhost:8090/NCU_MIS_SA/new_cart.html")
     	}
     	else {

@@ -38,7 +38,7 @@
                     <li><a href="new_store.html">據點查詢</a></li>
                     <li><a href="new_notice.html">注意事項</a></li>
                 </ul>
-                <!--input type="button" onclick="javascript:location.href='login.html'" value="Login" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;"-->
+                <!--input type="button" onclick="javascript:location.href='new_login.html'" value="Login" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;"-->
             </nav>
         </div>
         <div class="container">
@@ -60,18 +60,17 @@
                 </header>
 
                 <body>
-                    <table style="width: 100%; padding: 1px;">
+                    <table id="table" style="width: 100%; padding: 1px;">
                         <tr>
                             <th>身分證字號</th>
-                            <th>密碼</th>
                             <th>姓名</th>
                             <th>電子郵件</th>
                             <th>生日</th>
                             <th>手機</th>
                             <th>地址</th>
                             <th>汽車駕照管轄編號</th>
-                            <th>修改日期</th>
                             <th>註冊日期</th>
+                            <th>功能</th>
                         </tr>
                     </table>
                 </body>
@@ -114,8 +113,106 @@
             Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
         </div>
     </div-->
-
-
 </body>
+            <script type="text/javascript">
+                // 全域變數紀錄SQL指令下的次數
+                var sql_num = 0;
+                function deleteMember(id) {
+                    var check = window.confirm("確認刪除會員？");
+                    if (check == true) {
+                        console.log("You pressed OK!");
+                        var request = {'id': id};
+                        var data_string = JSON.stringify(request);
+                        $.ajax({
+                            type: "DELETE",
+                            url: "api/member.do",
+                            crossDomain: true,
+                            data: data_string,
+                            cache: false,
+                            dataType: 'json',
+                            timeout: 5000,
+                            success: function (response) {
+                                if(response.status == 200){
+                                    $("#flashMessage").html("成功! 已經成功刪除會員...");
+                                    $("#flashMessage").show();
+                                    getAllMember();
+                                }
+                                console.log(response);
+                            },
+                            error: function () {
+                                alert("無法連線到伺服器！");
+                            }
+                        });
+                    }
+                    else {
+                        console.log("You pressed Cancel!");
+                    }
+                }
 
+                function getAllMember() {
+                    // 發出POST的GET請求取得所有會員列表
+                    $.ajax({
+                            type: "GET",
+                            url: "api/member.do",
+                            crossDomain: true,
+                            cache: false,
+                            dataType: 'json',
+                            timeout: 5000,
+                            success: function (response) {
+                                if(response.status == 200){
+                                    updateTable(response.response.data);
+                                    updateSQLTable(response.response);
+                                }
+                                console.log(response);
+                            },
+                            error: function () {
+                                alert("無法連線到伺服器！");
+                            }
+                    });
+                }
+                
+                // 更新會員列表表格
+                function updateTable(data) {
+                    $("#table > tbody").empty();
+                    var table_html = "<tr><th>身分證字號</th><th>姓名</th><th>電子郵件</th><th>生日</th><th>手機</th><th>地址</th><th>汽車駕照管轄編號</th><th>功能</th></tr>";
+                    $.each(data, function(index, value) {
+                        table_html += '<tr><td scope="row">' + value['IDNumber'] + '</td>';
+                        table_html += '<td>' + value['name'] + '</td>';
+                        table_html += '<td>' + value['email'] + '</td>';
+                        table_html += '<td>' + value['birth'] + '</td>';
+                        table_html += '<td>' + value['mobilephone'] + '</td>';
+                        table_html += '<td>' + value['address'] + '</td>';
+                        table_html += '<td>' + value['license'] + '</td>';
+                        //table_html += '<td>' + value['created'] + '</td>';
+                        table_html += '<td>' + '<a href="new_edit.html?id=' + value['id'] + '">編輯</a> | ';
+                        table_html += '<a href="javascript: deleteMember(' + value['id'] + ');">刪除</a></td></tr>';
+                    })
+
+                    $("#table > tbody").append(table_html);
+                }
+                
+                // 更新SQL指令歷史表格
+                function updateSQLTable(data) {
+                    $("#sql_log > tbody").empty();
+                    var time = (data.time / 1000000).toFixed(2);
+                    var table_html = "";
+                    
+                    sql_num = 0;
+                    sql_num += 1
+
+                    table_html += '<tr>';
+                    table_html += '<td>' + sql_num + '</td>';
+                    table_html += '<td>' + data.sql + '</td>';
+                    table_html += '<td style="text-align: right">' + '0' + '</td>';
+                    table_html += '<td style="text-align: right">' + data.row + '</td>';
+                    table_html += '<td style="text-align: right">' + data.row + '</td>';
+                    table_html += '<td style="text-align: right">' + time + '</td>';
+                    table_html += '</tr>';
+                    $("#sql_log > tbody").append(table_html);
+                    $("#sql_summary").html("(default) " + data.row + " queries took " + time + " ms");
+                }
+                $(document).ready(function() {
+                    getAllMember();
+                });
+            </script>
 </html>

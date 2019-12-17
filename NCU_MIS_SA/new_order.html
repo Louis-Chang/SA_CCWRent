@@ -60,11 +60,11 @@
                 </header>
 
                 <body>
-                    <p>您的取還車地點：</p>
-                    <p>您的取還車時間：</p>
-                    <p>您的訂購車型：</p>
-                    <p>租金試算：</p>
-                    <input type="button" onclick="javascript:location.href=''" value="確認送出" style="position: absolute; right: 40px; bottom: 20px; color: white; display: inline-block; background: #80BA8E;">
+                    <p id="rentarea"><label></label></p>
+                    <p id="renttime"><label></label></p>
+                    <p id="rentname"><label></label></p>
+                    <p id="rentprice"><label style="color:blue; font-size: 20px;font-weight:bold;"></label></p>
+                    <input type="button" onclick="javascript:location.href='new_index.html'" value="確認並返回首頁" style="position: absolute; right: 40px; bottom: 20px; color: white; display: inline-block; background: #80BA8E;">
                 </body>
             </section>
         </div>
@@ -88,6 +88,8 @@
                 <header>
                     <h2>聯絡方式</h2>
                     <span class="byline"> <br>Survice phone number      0975376458</span>
+                    	<script src="statics/js/jquery-3.4.1.min.js"></script>
+ 						<script src="statics/js/jquery-confirm.js"></script>
                 </header>
                 <ul class="contact">
                     <li><a href="#" class="fa fa-twitter"><span>Twitter</span></a></li>
@@ -106,6 +108,57 @@
             Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
         </div>
     </div-->
+
+    <script>
+
+
+    var cartdata = [];
+    getCartData();
+    checkRent();
+
+
+    function checkRent(){
+   	console.log(this.cartdata);
+   	
+   	
+   	updateRentData(this.cartdata);
+
+    function updateRentData(data) {
+    	console.log(data.rentname);
+    	table_rentarea_html = '';
+    	$("#rentarea > label").empty();
+        table_rentarea_html += "您的取車地點：<B>" + data.rentlocation + " Station</B>、您的還車地點：<B>" + data.backlocation + " Station</B>";
+     	$("#rentarea > label").append(table_rentarea_html);
+        //
+    	table_renttime_html = '';
+    	$("#renttime > label").empty();
+        table_renttime_html += "您的取車時間：<B>" + data.rentdate + "</B>、您的還車時間：<B>" + data.backdate +"</B>";
+      	$("#renttime > label").append(table_renttime_html);
+      	//
+  		table_rentname_html = '';
+  		$("#rentname > label").empty();
+      	table_rentname_html += "您的訂購車型：<B>" + data.rentname + "</B>";
+    	$("#rentname > label").append(table_rentname_html);
+        //
+  		table_rentprice_html = '';
+  		$("#rentprice > label").empty();
+      	table_rentprice_html += "您租賃" + data.rentname + "，其每日租賃價格為" + data.price + "元<br>";
+      	table_rentprice_html += "故租賃" + data.rentday + "日總租賃價格為" + data.totalprice + "元<br>";
+    	$("#rentprice > label").append(table_rentprice_html);
+    }
+
+    }
+
+
+
+    function getCartData() {
+    	let cartdata = JSON.parse(localStorage.getItem("Cart_Data"));
+    	cartdata = !cartdata ? new Array() : cartdata;
+    	let data = JSON.parse(cartdata);
+    	this.cartdata = data;
+    	return [cartdata];
+    }
+    </script>
 
 
 </body>

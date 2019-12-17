@@ -21,6 +21,8 @@
 			<link rel="stylesheet" href="css/style.css" />
 			<link rel="stylesheet" href="css/style-desktop.css" />
 		</noscript>
+	<script src="statics/js/jquery-3.4.1.min.js"></script>
+ 	<script src="statics/js/jquery-confirm.js"></script>
 </head>
 
 <body>
@@ -65,7 +67,7 @@
                             <td>
                                 <form>
                                     取車地點：
-                                    <select name="getLoc">
+                                    <select id="rentlocation" name="getLoc">
 										<option value="Taipei">台北</option>
 										<option value="Taoyuan">桃園</option>
 										<option value="Hsinchu">台中</option>
@@ -77,7 +79,7 @@
                             <td>
                                 <form>
                                     還車地點：
-                                    <select name="getLoc">
+                                    <select id="backlocation" name="getLoc">
 										<option value="Taipei">台北</option>
 										<option value="Taoyuan">桃園</option>
 										<option value="Hsinchu">台中</option>
@@ -90,27 +92,33 @@
                         <tr>
                             <td>
                                 <form action="/action_page.php">
-                                    取車日期： <input type="date" name="bday">
+                                    取車日期： <input type="date" id="rentday">
                                 </form>
                             </td>
                             <td>
                                 <form action="/action_page.php">
-                                    還車日期： <input type="date" name="bday">
+                                    還車日期： <input type="date" id="backday">
                                 </form>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2">
+                            <td colspan="2" id="rent_carname">
                                 您預定的車型為：
+			          <label style="color:black; font-size: 20px">
+			          </label>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2">
-                                租金試算：
+                            <td colspan="2" id="rent_money">
+                            <input type="button" onclick="calRentMoney()" value="租金試算" style="display: inline-block;">
+           	 ：            
+           			  <label style="color:blue; font-size: 20px">
+			          </label>
                             </td>
                         </tr>
-                    </table>
-                    <input type="button" onclick="javascript:location.href='order.html'" value="送出" style="position: absolute; right: 40px; bottom: 20px; color: white; display: inline-block; background: #80BA8E;">
+                    </table>   
+                    <input type="button" onclick="cancelRent()" value="取消" style="position: absolute; right: 100px; bottom: 20px; color: white; display: inline-block; background: #80BA8E;">
+                    <input type="button" onclick="checkRent()" value="預訂" style="position: absolute; right: 40px; bottom: 20px; color: white; display: inline-block; background: #80BA8E;">
                 </body>
             </section>
         </div>
@@ -144,14 +152,187 @@
             </section>
         </div>
     </div>
-    <!-- /Footer -->
 
-    <!-- Copyright -->
-    <!--div id="copyright">
-        <div class="container">
-            Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
-        </div>
-    </div-->
+
+    
+      <script>
+    var [client_cart_obj, client_cart_amount]  = getCartDataFromClient();
+    var rentdata;
+	var rentname;
+	var rentday;
+	var price;
+	var totalprice;
+
+    if (client_cart_obj.length == 0) {
+    	alert("沒有選擇租賃車輛！");
+    	calcSummaryInformation();
+    	setButtonState("check", false);
+    }
+    else {
+    	getCartProduct();
+    }
+    
+    
+    function checkRent(){
+    	var data = {
+    			"name": "test",
+    			"email": "test@test.com",
+    			"phone": "0987878787",
+    			"rentlocation": $("#rentlocation").val(),
+    			"backlocation": $("#backlocation").val(),
+    			"rentdate": $("#rentday").val(),
+    			"backdate": $("#backday").val(),
+    			"address": "中大路300號",
+    			"item": client_cart_obj,
+    			"quantity": client_cart_amount
+    	}
+    	
+    	var data_string = JSON.stringify(data);
+    	console.log(data_string);
+    	
+        $.ajax({
+            type: "POST",
+            url: "api/order.do",
+            data: data_string,
+            crossDomain: true,
+            cache: false,
+            dataType: 'json',
+            timeout: 100000,
+            success: function (response) {
+                if(response.status == 200){
+                	updateCartDataToLocal();
+                	alert("成功！");
+                	document.location.href = "new_order.html";
+                	client_cart_obj = [];
+                 	client_cart_amount = [];
+                    updateCartDataToClent();
+                }
+            },
+            error: function () {
+                alert("無法連線到伺服器！");
+            }
+          });
+
+    }
+    
+
+    <!-- 計算租車租金 -->
+    function calRentMoney() {
+    	 var rentday = document.getElementById("rentday").value;
+    	 var backday = document.getElementById("backday").value;
+    	 var date_diff_indays = function(rentday, backday) {
+    		 dt1 = new Date(rentday);
+    		 dt2 = new Date(backday);
+    		 return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24));
+    		}
+    	 updateRentMoney(this.rentdata, date_diff_indays(rentday, backday));
+    	}
+    
+    <!-- 取消訂單 -->
+    function cancelRent() {
+    	console.log("[@Action]清空購物車");
+    	cleanAllData();
+    }  
+    
+    function cleanAllData() {
+    	client_cart_obj = [];
+     	client_cart_amount = [];
+        updateCartDataToClent();
+        $("#rent_carname > label").empty();
+        $("#rent_money > label").empty();
+  		alert("沒有選擇租賃車輛！");
+  		document.location.href = "new_cars.html";
+    }
+    
+    function updateCartDataToClent() {
+    	localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
+    	localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
+    }
+
+    <!-- 取得使用者租賃之車輛 -->
+    function getCartProduct() {
+      $.ajax({
+        type: "GET",
+        url: "api/product.do",
+        crossDomain: true,
+        cache: false,
+        data: "id_list=" + client_cart_obj.toString(),
+        dataType: 'json',
+        timeout: 100000,
+        success: function (response) {
+          if (response.status == 200) {
+        	  updateRentCarName(response.response.data);
+        	  setRentData(response.response.data);
+          }
+        },
+        error: function () {
+          alert("無法連線到伺服器！");
+        }
+      });
+    }
+    
+    
+    function setRentData(data){
+    	this.rentdata = data;
+    }
+
+    <!-- 更新租車車輛名 -->
+    function updateRentCarName(data) {
+    	table_html = '';
+    	this.rentname =  data[0].name;
+    	$("#rent_carname > label").empty();
+        $.each(data, function(index, value) {
+        	table_html += value.name;
+        })
+      $("#rent_carname > label").append(table_html);
+    }
+    
+    <!-- 更新租車金額 -->
+    function updateRentMoney(data, date) {
+    	var totalmoney = data[0].price * date;
+    	this.price = data[0].price;
+    	this.totalprice = totalmoney;
+    	this.rentday = date;
+    	table_html = '';
+    	$("#rent_money > label").empty();
+        $.each(data, function(index, value) {		
+        	table_html += "租賃 " + value.name +" " + date + "天，需" + totalmoney + "元！";
+        })
+      $("#rent_money > label").append(table_html);
+    }
+    
+    function getCartDataFromClient() {
+    	let cart = JSON.parse(localStorage.getItem("client_cart_obj"));
+    	let amount = JSON.parse(localStorage.getItem("client_cart_amount"));
+    	cart = !cart ? new Array() : cart;
+    	amount = !amount ? new Array() : amount;
+    	return [cart, amount];
+    }
+    
+
+    
+    
+    function updateCartDataToLocal(){
+    	var data = {
+				"rentname":rentname,
+				"rentday":rentday,
+				"price":price,
+				"totalprice":totalprice,
+    			"rentlocation": $("#rentlocation").val(),
+    			"backlocation": $("#backlocation").val(),
+    			"rentdate": $("#rentday").val(),
+    			"backdate": $("#backday").val(),
+    	}
+
+    	var data_string = JSON.stringify(data);
+    	console.log(data_string);
+    	localStorage.setItem("Cart_Data", JSON.stringify(data_string));
+    }
+    
+
+    
+
+  </script>
 
 
 </body>

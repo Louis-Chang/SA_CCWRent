@@ -7,7 +7,7 @@
 <html>
 
 <head>
-    <title>租車注意事項</title>
+    <title>所有訂單資料</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -20,7 +20,10 @@
 			<link rel="stylesheet" href="css/skel-noscript.css" />
 			<link rel="stylesheet" href="css/style.css" />
 			<link rel="stylesheet" href="css/style-desktop.css" />
-		</noscript>
+        </noscript>
+    <script src="statics/js/jquery-3.4.1.min.js"></script>
+    <script src="statics/js/jquery-confirm.js"></script>
+    <script src="statics/js/big.min.js"></script>
 </head>
 
 <body>
@@ -31,7 +34,7 @@
             <!-- Nav -->
             <nav id="nav">
                 <ul>
-                    <li class="active"><a href="index.html">首頁</a></li>
+                    <li class="active"><a href="new_index.html">首頁</a></li>
                     <li><a href="new_about.html">關於CCW Rent</a></li>
                     <li><a href="new_cars.html">車輛資訊</a></li>
                     <li><a href="new_store.html">據點查詢</a></li>
@@ -55,30 +58,21 @@
         <div id="content" class="container">
             <section>
                 <header>
-                    <h2><a href="index.html">首頁</a>／<a href="new_cars.html">車輛資訊</a>／Toyota 86</h2>
+                    <h2>所有訂單資料</h2>
+                    <h3><br>以下是目前存在的所有訂單</h3>
                 </header>
 
                 <body>
-                    <table margin-left: auto; margin-right: auto; style="width: 80%; font-size: 20px;">
-                        <tr>
-                            <th>價格／日</th>
-                            <td>7000</td>
-                        </tr>
-                        <tr>
-                            <th>cc數</th>
-                            <td>2000</td>
-                        </tr>
-                        <tr>
-                            <th>座位數</th>
-                            <td>2</td>
-                        </tr>
-                        <tr>
-                            <th>定位</th>
-                            <td>跑車</td>
-                        </tr>
-                    </table>
-                    <img src="images/86_2000_2.png" width="50%" height="50%" style="position: relative; left: 50px; top: 50px; right: 50px;">
-                    <input type="button" onclick="javascript:location.href='new_cars.html'" value="返回車輛資訊" style="position: absolute; right: 100px; bottom: 100px; color: white; display: inline-block; background: #80BA8E;">
+	                <table id="order_table" style="width: 100%;">
+		                <tr>
+		                    <th>訂單編號</th>
+		                    <th>訂購人</th>
+		                    <th>建立時間</th>
+		                    <th>修改時間</th>
+		                    <th>總價</th>
+		                    <th>詳細資料</th>
+		            	</tr>
+	                </table>
                 </body>
             </section>
         </div>
@@ -122,5 +116,54 @@
 
 
 </body>
+
+<script>
+    function getAllOrderData() {
+        $.ajax({
+            type: "GET",
+            url: "api/order.do",
+            crossDomain: true,
+            cache: false,
+            dataType: 'json',
+            timeout: 100000,
+            success: function(response) {
+                if (response.status == 200) {
+                	console.log("SUCC")
+                    updateHTML(response.response.data);
+                }
+                console.log(response);
+            },
+            error: function() {
+                alert("無法連線到伺服器！");
+            }
+        });
+    }
+
+    getAllOrderData();
+
+    function updateHTML(data) {
+        var inner_html = '';
+        var temp = '';
+
+        $.each(data, function(key, value) {
+            var total_price = Big(0.0);
+            $.each(value['product_info'], function(k, v) {
+                total_price = total_price.plus(v['subtotal'])
+            });
+
+            temp = '<tr>';
+            temp += '<td>#' + value['order_info']['id'] + '</td>';
+            temp += '<td>' + value['order_info']['name'] + '</td>';
+            temp += '<td>' + value['order_info']['create'] + '</td>';
+            temp += '<td>' + value['order_info']['modify'] + '</td>';
+            temp += '<td>' + total_price + '</td>';
+            temp += '<td><a href="new_order_detail.html?id=' + value['order_info']['id'] + '">查看</a></td>';
+            temp += '</tr>';
+            inner_html = temp + inner_html;
+        });
+        $('#order_table').append(inner_html);
+
+    }
+</script>
 
 </html>

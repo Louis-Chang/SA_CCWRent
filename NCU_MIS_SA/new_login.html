@@ -5,133 +5,143 @@
     Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
 <html>
-	<head>
-		<title>Linear by TEMPLATED</title>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta name="description" content="" />
-		<meta name="keywords" content="" />
-		<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700,500,900' rel='stylesheet' type='text/css'>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-		<script src="js/skel.min.js"></script>
-		<script src="js/skel-panels.min.js"></script>
-		<script src="js/init.js"></script>
-		<noscript>
+
+<head>
+    <title>租車注意事項</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700,500,900' rel='stylesheet' type='text/css'>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/skel.min.js"></script>
+    <script src="js/skel-panels.min.js"></script>
+    <script src="js/init.js"></script>
+    <noscript>
 			<link rel="stylesheet" href="css/skel-noscript.css" />
 			<link rel="stylesheet" href="css/style.css" />
 			<link rel="stylesheet" href="css/style-desktop.css" />
 		</noscript>
-	</head>
-	<body>
+</head>
 
-	<!-- Header -->
-		<div id="header">
-			<div id="nav-wrapper"> 
-				<!-- Nav -->
-				<nav id="nav">
-					<ul>
-                    	<li class="active"><a href="index.html">首頁</a></li>
-                    	<li><a href="new_about.html">關於CCW Rent</a></li>
-                    	<li><a href="new_cars.html">車輛資訊</a></li>
-                    	<li><a href="new_store.html">據點查詢</a></li>
-                    	<li><a href="new_notice.html">租車注意事項</a></li>
-                	</ul>
-                	 <input type="button" onclick="javascript:location.href='login.html'" value="Login" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
-				</nav>
-			</div>
-			<div class="container"> 
-				
-				<!-- Logo -->
-				<div id="logo">
-					<h1><a href="#">CCW RENT</a></h1>
-				</div>
-			</div>
-		</div>
-	<!-- Header --> 
+<body>
 
-	<!-- Main -->
-		<div id="main">
-			<div id="content" class="container">
-				<section>
-					<header>
-						<h2>會員登入</h2>
-						<span class="byline">Integer sit amet pede vel arcu aliquet pretium</span>
-					</header>
-					<body>
-						<div id="login_frame">
-						<form method="post" action="login.js">
-							<p><label class="label_input">帳號</label><input type="text" id="userid" class="text_field"/></p>
-							<p><label class="label_input">密碼</label><input type="text" id="password" class="text_field"/></p>
-							<div id="login_control">
-							<input type="button" id="btn_login" value="登入" onclick="login();"/>
-							<input type="button" id="btn_register" value="會員註冊" onclick="javascript:location.href='register.html'"/>
-							<a id="forget_pwd" href="forget_pwd.html">忘記密碼？</a>
-						</div>
-						</form>
-						</div>
-					</body>						
-					<script type="text/javascript">
-						$(document).ready(function() {
-                    		// 處理表單點擊事件
-                    		var $form = $('#btn_login');
-                    		$form.click(function() {
-                        		login();
-							});
+    <!-- Header -->
+    <div id="header">
+        <div id="nav-wrapper">
+            <!-- Nav -->
+            <nav id="nav">
+                <ul>
+                    <li class="active"><a href="index.html">首頁</a></li>
+                    <li><a href="about.html">關於CCW Rent</a></li>
+                    <li><a href="cars.html">車輛資訊</a></li>
+                    <li><a href="store.html">據點查詢</a></li>
+                    <li><a href="notice.html">注意事項</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="container">
 
-                    	function login() {
-							var userid = document.getElementById("userid");
-							var pass = document.getElementById("password");
-							if (userid.value == "") {
-								alert("請輸入使用者名稱");
-							} else if (pass.value  == "") {
-								alert("請輸入密碼");
-							} else if(username.value == "admin" && pass.value == "123456"){
-								window.location.href="index.html";
-							} else {
-								alert("請輸入正確的使用者名稱和密碼！")
-							}
-						}
-					</script>
-				</section>
-			</div>
-		</div>
-	<!-- /Main -->
+            <!-- Logo -->
+            <div id="logo">
+                <a href="#" style="color: rgba(0, 0, 0, 0);">CCW RENT</a>
+            </div>
+        </div>
+    </div>
+    <!-- Header -->
 
-	<!-- Tweet -->
-		<div id="tweet">
-			<div class="container">
-				<section>
-					<blockquote>&ldquo;In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque viverra vulputate enim. Aliquam erat volutpat.&rdquo;</blockquote>
-				</section>
-			</div>
-		</div>
-	<!-- /Tweet -->
+    <!-- Main -->
+    <div id="main">
+        <div id="content" class="container">
+            <section>
+                <header>
+                    <h2><a href="index.html">首頁</a>／登入
+                        <h2>
+                </header>
 
-	<!-- Footer -->
-		<div id="footer">
-			<div class="container">
-				<section>
-					<header>
-						<h2>Get in touch</h2>
-						<span class="byline">Integer sit amet pede vel arcu aliquet pretium</span>
-					</header>
-					<ul class="contact">
-						<li><a href="#" class="fa fa-twitter"><span>Twitter</span></a></li>
-						<li class="active"><a href="#" class="fa fa-facebook"><span>Facebook</span></a></li>
-						<li><a href="#" class="fa fa-dribbble"><span>Pinterest</span></a></li>
-						<li><a href="#" class="fa fa-tumblr"><span>Google+</span></a></li>
-					</ul>
-				</section>
-			</div>
-		</div>
-	<!-- /Footer -->
+                <body>
+                    <div id="login_frame">
+                        <form method="post" action="login.js">
+                            <table>
+                                <tr>
+                                    <td><label class="label_input">身分證字號</label></td>
+                                    <td><input type="text" id="userid" class="text_field" /></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="label_input">密碼</label></td>
+                                    <td><input type="text" id="password" class="text_field" /></td>
+                                </tr>
+                            </table>
+                            <div id="login_control">
+                                <input type="button" id="btu_login" value="登入" onclick="login();" style="position: relative;; color: white; display: inline-block; background: #80BA8E;">
+                                <input type="button" id="btu_login" value="會員註冊" onclick="javascript:location.href='register.html'" style="position: relative; color: white; display: inline-block; background: #80BA8E;">
+                            </div>
+                        </form>
+                    </div>
 
-	<!-- Copyright -->
-		<div id="copyright">
-			<div class="container">
-				Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
-			</div>
-		</div>
+                </body>
+            </section>
+        </div>
+    </div>
+    <!-- /Main -->
+
+    <!-- Tweet -->
+    <div id="tweet">
+        <div class="container" style="color: white; font-size: 20px;">
+            <section>
+                <p>全台據點隨你搜<br>現在就來CCW RENT一下吧</p>
+            </section>
+        </div>
+    </div>
+    <!-- /Tweet -->
+
+    <!-- Footer -->
+    <div id="footer">
+        <div class="container">
+            <section>
+                <header>
+                    <h2>聯絡方式： <a href="tel:+886-975-3760458">0975376458</a></h2>
+                </header>
+                <ul class="contact">
+                    <li><a href="#" class="fa fa-twitter"><span>Twitter</span></a></li>
+                    <li class="active"><a href="#" class="fa fa-facebook"><span>Facebook</span></a></li>
+                    <li><a href="#" class="fa fa-dribbble"><span>Pinterest</span></a></li>
+                    <li><a href="#" class="fa fa-tumblr"><span>Google+</span></a></li>
+                </ul>
+            </section>
+        </div>
+    </div>
+    <!-- /Footer -->
+
+    <!-- Copyright -->
+    <!--div id="copyright">
+        <div class="container">
+            Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
+        </div>
+    </div-->
 
 
-	</body>
+</body>
+<script type="text/javascript">
+    $(document).ready(function() {
+                // 處理表單點擊事件
+                var $form = $('#btn_login');
+                $form.click(function() {
+                    login();
+                });
+
+                function login() {
+                    var userid = document.getElementById("userid");
+                    var pass = document.getElementById("password");
+                    if (userid.value == "") {
+                        alert("請輸入使用者名稱");
+                    } else if (pass.value == "") {
+                        alert("請輸入密碼");
+                    } else if (username.value == "admin" && pass.value == "123456") {
+                        window.location.href = "index.html";
+                    } else {
+                        alert("請輸入正確的使用者名稱和密碼！")
+                    }
+                }
+</script>
+
 </html>

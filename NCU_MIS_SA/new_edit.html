@@ -171,11 +171,13 @@
                 // 取得網址參數
                 var url_string = window.location.href;
                 var url = new URL(url_string);
+                var IDNumber = url.searchParams.get("IDNumber");
                 var id = url.searchParams.get("id");
                 var sql_num = 0;
 
-                function updateMember(id) {       
-                    var IDNumber = $('#member_IDNumber').val();
+                function updateMember(IDNumber) {
+                	//var id = localStorage.getItem('id');
+                	//var idDNumber = $('#member_IDNumber').val();
                     var password = $('#member_password').val();
                     var confirmpassword = $('#member_confirmpassword').val();
                     var name = $('#member_name').val();
@@ -196,7 +198,6 @@
                     else {
                         // 將資料組成JSON格式
                         var data_object = {
-                            "id": id,
                         	"IDNumber": IDNumber,
                         	"password": password,
                             "name": name,
@@ -220,11 +221,13 @@
                                 dataType: 'json',
                                 timeout: 100000,
                                 success: function (response) {
-                                    $('#flashMessage').html(response.message);
-                                    $('#flashMessage').show();
+                                    //$('#flashMessage').html(response.message);
+                                    //$('#flashMessage').show();
                                     if(response.status == 200){
-                                        updateSQLTable(response.response);
-                                        getMember();
+                                        //updateSQLTable(response.response);
+                                        //getMember();
+                                        alert("會員資料更新成功");
+                                        document.location.href = "new_memberInfo.html";
                                     }
                                 },
                                 error: function () {
@@ -258,14 +261,14 @@
                         type: "GET",
                         url: "api/member.do",
                         crossDomain: true,
-                        data: "id=" + id,
+                        data: "IDNumber=" + IDNumber,
                         cache: false,
                         dataType: 'json',
                         timeout: 100000,
                         success: function (response) {
                             if(response.status == 200){
                             	updateSQLTable(response.response);
-                            	document.getElementById('member_IDNumber').value = response['response']['data'][0]['IDNumber'];
+                            	/*document.getElementById('member_IDNumber').value = response['response']['data'][0]['IDNumber'];
                             	document.getElementById('member_password').value = response['response']['data'][0]['password'];
                             	document.getElementById('member_name').value = response['response']['data'][0]['name'];
                             	document.getElementById('member_birth').value = response['response']['data'][0]['birth'];
@@ -274,7 +277,15 @@
                             	document.getElementById('member_license').value = response['response']['data'][0]['license'];
                             	document.getElementById('member_email').value = response['response']['data'][0]['email'];
                             	document.getElementById('member_login_times').value = response['response']['data'][0]['login_times'];
-                            	document.getElementById('member_status').value = response['response']['data'][0]['status'];
+                            	document.getElementById('member_status').value = response['response']['data'][0]['status'];*/
+                            	document.getElementById('member_IDNumber').value = localStorage.getItem('IDNumber');
+                                document.getElementById('member_password').value = localStorage.getItem('password');
+                                document.getElementById('member_name').value = localStorage.getItem('name');
+                                document.getElementById('member_birth').value = localStorage.getItem('birth');
+                                document.getElementById('member_mobilephone').value = localStorage.getItem('mobilephone');
+                                document.getElementById('member_address').value = localStorage.getItem('address');
+                                document.getElementById('member_license').value = localStorage.getItem('license');
+                                document.getElementById('member_email').value = localStorage.getItem('email');
                             }
                         	// IDNumber, password, name, birth, mobilephone, address, license, email
                         	// 這邊尚未更改
@@ -287,7 +298,7 @@
                 }
 
                 $('#submit').click(function() {
-                    updateMember(id)
+                    updateMember(IDNumber)
                 });
                 
                 $(document).ready(function() {

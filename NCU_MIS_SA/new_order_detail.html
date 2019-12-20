@@ -21,6 +21,9 @@
 			<link rel="stylesheet" href="css/style.css" />
 			<link rel="stylesheet" href="css/style-desktop.css" />
 		</noscript>
+	<script src="statics/js/jquery-3.4.1.min.js"></script>
+  	<script src="statics/js/jquery-confirm.js"></script>
+  	<script src="statics/js/big.min.js"></script>
 </head>
 
 <body>
@@ -55,38 +58,41 @@
         <div id="content" class="container">
             <section>
                 <header>
-                    <h2>您的訂單詳情</h2>
-                    <h3><br>以下是以下是您的訂單</h3>
+                    <h2>訂單詳情</h2>
+                    <h3><br>以下是該筆訂單之所有詳細資料</h3>
                 </header>
 
                 <body>
                     <table style="width: 80%;">
                         <tr>
-                            <th colspan="4">訂單資料</th>
+                            <th colspan="4">訂單資料：</th>
                         </tr>
                         <tr>
-                            <td colspan="2">訂單編號</td>
-                            <td colspan="2">建立日期</td>
+                            <td colspan="2">訂單編號：<label id="orderID" style="font-weight:bold;">{{orderID}}</label></td>
+                            <td colspan="2">建立日期：<label id="orderCreate" style="font-weight:bold;">{{orderCreate}}</label></td>
                         </tr>
                         <tr>
-                            <td>姓名</td>
-                            <td>手機號碼</td>
-                            <td>身分證字號</td>
-                            <td>電子郵件</td>
+                            <td>姓名：<label id="orderName" style="font-weight:bold;">{{orderName}}</label></td>
+                            <td>手機號碼：<label id="orderPhone" style="font-weight:bold;">{{orderPhone}}</label></td>
+                            <td>身分證字號：<label id="orderUserID" style="font-weight:bold;">{{orderUserID}}</label></td>
+                            <td>電子郵件：<label id="orderEmail" style="font-weight:bold;">{{orderEmail}}</label></td>
                         </tr>
                         <tr>
-                            <td colspan="4">住址</td>
+                            <td colspan="4">住址：<label id="orderAddress" style="font-weight:bold;">{{orderAddress}}</label></td>
                         </tr>
                         <tr>
-                            <td colspan="4">車型</td>
+                            <td colspan="4">車型：<label id="orderProduct" style="font-weight:bold;">{{orderProduct}}</label></td>
                         </tr>
                         <tr>
-                            <td colspan="2">取還車日期</td>
-                            <td colspan="2">取還車時間</td>
+                            <td colspan="2">取車地點：<label id="rentLocation" style="font-weight:bold;">{{rentLocation}}</label></td>
+                            <td colspan="2">還車地點：<label id="backLocation" style="font-weight:bold;">{{backLocation}}</label></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">取車日期：<label id="rentDay" style="font-weight:bold;">{{rentDay}}</label></td>
+                            <td colspan="2">還車日期：<label id="backDay" style="font-weight:bold;">{{backDay}}</label></td>
                         </tr>
                     </table>
-                    <div align="right"><strong>總價：</strong></div>
-                    <input type="button" onclick="javascript:location.href=''" value="刪除訂單" style="position: absolute; right: 40px; bottom: 20px; color: white; display: inline-block; background: #80BA8E;">
+                    <div align="right"><strong style="font-size:24px;font-weight:bold;">總價：</strong></div>
                 </body>
             </section>
         </div>
@@ -120,14 +126,58 @@
             </section>
         </div>
     </div>
-    <!-- /Footer -->
 
-    <!-- Copyright -->
-    <!--div id="copyright">
-        <div class="container">
-            Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
-        </div>
-    </div-->
+  <script>
+  //取得網址參數
+  var url_string = window.location.href;
+  var url = new URL(url_string);
+  var id = url.searchParams.get("id");
+  
+  function getOrderData() {
+	  $.ajax({
+          type: "GET",
+          url: "api/order.do",
+          data: "id=" + id,
+          crossDomain: true,
+          cache: false,
+          dataType: 'json',
+          timeout: 100000,
+          success: function (response) {
+              if(response.status == 200){
+            	  console.log(response.response.data);
+            	  updateHTML(response.response.data);
+              }
+          },
+          error: function () {
+              alert("無法連線到伺服器！");
+          }
+    });
+  }
+  
+  getOrderData();
+  
+  function updateHTML(data) {
+	  $("#orderID").html(data['order_info']['id']);
+	  $("#orderCreate").html(data['order_info']['create']);
+	  $("#orderName").html(data['order_info']['name']);
+	  $("#orderPhone").html(data['order_info']['phone']);
+	  //$("#orderUserID").html(data['order_info']['id']);
+	  $("#orderEmail").html(data['order_info']['email']);
+	  $("#orderAddress").html(data['order_info']['address']);
+	  //$("#orderProduct").html(data['order_info']['id']);
+	  $("#rentLocation").html(data['order_info']['rentlocation']);
+	  $("#backLocation").html(data['order_info']['backlocation']);
+	  $("#rentDay").html(data['order_info']['rentdate']);
+	  $("#backDay").html(data['order_info']['backdate']);
+	  
+
+  }
+  </script>
+
+
+
+
+
 
 
 </body>

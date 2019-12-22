@@ -34,13 +34,10 @@
             <!-- Nav -->
             <nav id="nav">
                 <ul>
-                    <li class="active"><a href="new_index.html">首頁</a></li>
-                    <li><a href="new_about.html">關於CCW Rent</a></li>
-                    <li><a href="new_cars.html">車輛資訊</a></li>
-                    <li><a href="new_store.html">據點查詢</a></li>
-                    <li><a href="new_notice.html">注意事項</a></li>
+					<li><a href="new_members.html">會員管理</a></li>
+                    <li><a href="new_orderList.html">訂單管理</a></li>
                 </ul>
-                <input type="button" onclick="javascript:location.href='new_login.html'" value="Login" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
+                <input type="button" onclick="logout()" value="登出" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
             </nav>
         </div>
         <div class="container">
@@ -58,7 +55,7 @@
         <div id="content" class="container">
             <section>
                 <header>
-                    <h2>所有訂單資料</h2>
+                    <h2>管理者模式/所有訂單資料</h2>
                     <h3><br>以下是目前存在的所有訂單</h3>
                 </header>
 
@@ -164,6 +161,12 @@
         $('#order_table').append(inner_html);
 
     }
+    
+	function logout(){
+		localStorage.removeItem("User_data");
+		alert("您已登出！\n將自動為您導向首頁！")
+		document.location.href = "new_index.html";
+	}
 </script>
 
 </html>

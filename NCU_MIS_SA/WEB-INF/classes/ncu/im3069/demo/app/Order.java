@@ -23,6 +23,15 @@ public class Order {
     /** phone，會員手機 */
     private String phone;
     
+    /** IDnumber，會員身分證字號*/
+    private String IDnumber;
+    
+    /** carName，租賃車名*/
+    private String carName;
+    
+    /** totalPrice，租賃總價 */
+    private String totalPrice;
+    
     /** rentlocation，租借地點 */
     private String rentlocation;
     
@@ -57,11 +66,14 @@ public class Order {
      * @param address 會員地址
      * @param phone 會員姓名
      */
-    public Order(String name, String email, String address, String phone, String rentlocation, String backlocation, String rentdate,  String backdate) {
+    public Order(String name, String email, String address, String phone, String IDnumber, String carName, String totalPrice, String rentlocation, String backlocation, String rentdate,  String backdate) {
         this.name = name;
         this.email = email;
         this.address = address;
         this.phone = phone;
+        this.IDnumber = IDnumber;
+        this.carName = carName;
+        this.totalPrice = totalPrice;
         this.rentlocation = rentlocation;
         this.backlocation = backlocation;
         this.rentdate = rentdate;
@@ -82,12 +94,15 @@ public class Order {
      * @param create 訂單創建時間
      * @param modify 訂單修改時間
      */
-    public Order(int id, String name, String email, String address, String phone, String rentlocation, String backlocation, String rentdate,  String backdate, Timestamp create, Timestamp modify) {
+    public Order(int id, String name, String email, String address, String phone, String IDnumber, String carName, String totalPrice, String rentlocation, String backlocation, String rentdate,  String backdate, Timestamp create, Timestamp modify) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.address = address;
         this.phone = phone;
+        this.IDnumber = IDnumber;
+        this.carName = carName;
+        this.totalPrice = totalPrice;
         this.rentlocation = rentlocation;
         this.backlocation = backlocation;
         this.rentdate = rentdate;
@@ -183,6 +198,33 @@ public class Order {
     }
     
     /**
+     * 取得會員身分證
+     *
+     * @return String 回傳會員身分證
+     */
+    public String getIDnumber() {
+        return this.IDnumber;
+    }
+    
+    /**
+     * 取得租賃車名
+     *
+     * @return String 回傳租賃車名
+     */
+    public String getCarname() {
+        return this.carName;
+    }
+    
+    /**
+     * 取得租賃價格
+     *
+     * @return String 回傳租賃價格
+     */
+    public String getTotalprice() {
+        return this.totalPrice;
+    }
+    
+    /**
      * 取得租借地點
      *
      * @return String 回傳租借地點
@@ -247,6 +289,9 @@ public class Order {
         jso.put("email", getEmail());
         jso.put("address", getAddress());
         jso.put("phone", getPhone());
+        jso.put("IDnumber", getIDnumber());
+        jso.put("carName", getCarname());
+        jso.put("totalPrice",getTotalprice());
         jso.put("rentlocation", getRentLocation());
         jso.put("backlocation", getBackLocation());
         jso.put("rentdate", getRentDate());

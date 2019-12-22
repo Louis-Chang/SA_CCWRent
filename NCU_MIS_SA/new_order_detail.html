@@ -34,12 +34,10 @@
             <!-- Nav -->
             <nav id="nav">
                 <ul>
-                    <li class="active"><a href="index.html">首頁</a></li>
-                    <li><a href="new_about.html">關於CCW Rent</a></li>
-                    <li><a href="new_cars.html">車輛資訊</a></li>
-                    <li><a href="new_store.html">據點查詢</a></li>
-                    <li><a href="new_notice.html">注意事項</a></li>
+					<li><a href="new_members.html">會員管理</a></li>
+                    <li><a href="new_orderList.html">訂單管理</a></li>
                 </ul>
+                <input type="button" onclick="logout()" value="登出" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
                 <!--input type="button" onclick="javascript:location.href='new_login.html'" value="Login" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;"-->
             </nav>
         </div>
@@ -58,7 +56,7 @@
         <div id="content" class="container">
             <section>
                 <header>
-                    <h2>訂單詳情</h2>
+                    <h2>管理者模式/訂單詳情</h2>
                     <h3><br>以下是該筆訂單之所有詳細資料</h3>
                 </header>
 
@@ -92,7 +90,7 @@
                             <td colspan="2">還車日期：<label id="backDay" style="font-weight:bold;">{{backDay}}</label></td>
                         </tr>
                     </table>
-                    <div align="right"><strong style="font-size:24px;font-weight:bold;">總價：</strong></div>
+                    <div align="right"><strong style="font-size:24px;font-weight:bold;">總價：<label id="totalPrice" style="font-weight:bold;">{{totalPrice}}</label></strong></div>
                 </body>
             </section>
         </div>
@@ -161,17 +159,23 @@
 	  $("#orderCreate").html(data['order_info']['create']);
 	  $("#orderName").html(data['order_info']['name']);
 	  $("#orderPhone").html(data['order_info']['phone']);
-	  //$("#orderUserID").html(data['order_info']['id']);
+	  $("#orderUserID").html(data['order_info']['IDnumber']);
 	  $("#orderEmail").html(data['order_info']['email']);
 	  $("#orderAddress").html(data['order_info']['address']);
-	  //$("#orderProduct").html(data['order_info']['id']);
+	  $("#orderProduct").html(data['order_info']['carName']);
 	  $("#rentLocation").html(data['order_info']['rentlocation']);
 	  $("#backLocation").html(data['order_info']['backlocation']);
 	  $("#rentDay").html(data['order_info']['rentdate']);
 	  $("#backDay").html(data['order_info']['backdate']);
-	  
+	  $("#totalPrice").html(data['order_info']['totalPrice']);
 
   }
+  
+	function logout(){
+		localStorage.removeItem("User_data");
+		alert("您已登出！\n將自動為您導向首頁！")
+		document.location.href = "new_index.html";
+	}
   </script>
 
 

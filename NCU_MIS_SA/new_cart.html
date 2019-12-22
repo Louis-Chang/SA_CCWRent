@@ -162,6 +162,8 @@
 	var rentday;
 	var price;
 	var totalprice;
+    var userdata = [];
+    getUserData();
 
     if (client_cart_obj.length == 0) {
     	alert("沒有選擇租賃車輛！");
@@ -174,15 +176,20 @@
     
     
     function checkRent(){
+    	console.log(userdata);
+    	
     	var data = {
-    			"name": "test",
-    			"email": "test@test.com",
-    			"phone": "0987878787",
+    			"name": userdata.name,
+    			"email": userdata.email,
+    			"phone": userdata.mobilephone,
+    			"IDnumber": userdata.IDNumber,
+    			"carName": rentname,
+    			"totalPrice": totalprice,
     			"rentlocation": $("#rentlocation").val(),
     			"backlocation": $("#backlocation").val(),
     			"rentdate": $("#rentday").val(),
     			"backdate": $("#backday").val(),
-    			"address": "中大路300號",
+    			"address": userdata.address,
     			"item": client_cart_obj,
     			"quantity": client_cart_amount
     	}
@@ -213,6 +220,15 @@
             }
           });
 
+    }
+    
+    //從local端取得用戶資料
+    function getUserData() {
+    	let userdata = JSON.parse(localStorage.getItem("User_data"));
+    	userdata = !userdata ? new Array() : userdata;
+    	let data = JSON.parse(userdata);
+    	this.userdata = data;
+    	return [userdata];
     }
     
 
@@ -291,7 +307,7 @@
     function updateRentMoney(data, date) {
     	var totalmoney = data[0].price * date;
     	this.price = data[0].price;
-    	this.totalprice = totalmoney;
+    	this.totalprice = totalmoney.toString();
     	this.rentday = date;
     	table_html = '';
     	$("#rent_money > label").empty();

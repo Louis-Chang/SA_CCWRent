@@ -31,11 +31,11 @@
             <!-- Nav -->
             <nav id="nav">
                 <ul>
-                    <li class="active"><a href="index.html">首頁</a></li>
-                    <li><a href="about.html">關於CCW Rent</a></li>
-                    <li><a href="cars.html">車輛資訊</a></li>
-                    <li><a href="store.html">據點查詢</a></li>
-                    <li><a href="notice.html">注意事項</a></li>
+                    <li class="active"><a href="new_index.html">首頁</a></li>
+                    <li><a href="new_about.html">關於CCW Rent</a></li>
+                    <li><a href="new_cars.html">車輛資訊</a></li>
+                    <li><a href="new_store.html">據點查詢</a></li>
+                    <li><a href="new_notice.html">注意事項</a></li>
                 </ul>
             </nav>
         </div>
@@ -74,7 +74,6 @@
                             <div id="login_control">
                                 <input type="button" id="btn_mgr_login" value="管理者登入" style="position: relative;; color: white; display: inline-block; background: #80BA8E;">
                                 <input type="button" id="btn_mem_login" value="會員登入" style="position: relative;; color: white; display: inline-block; background: #80BA8E;">
-                                <input type="button" id="btn_register" value="會員註冊" onclick="javascript:location.href='new_register.html'" style="position: relative; color: white; display: inline-block; background: #80BA8E;">
                             </div>
                         </form>
                     </div>
@@ -136,7 +135,7 @@
             } else if (password == "") {
                 alert("請輸入密碼");
             } else{
-                mgrLogin(IDNumber, password);
+                mgr_login(IDNumber, password);
             }
         });
         $mem_login.click(function() {
@@ -153,7 +152,7 @@
     });
 
     function mgr_login() {
-
+    	document.location.href = "new_members.html";
     }
 
     function memLogin(IDNumber, password) {
@@ -184,18 +183,23 @@
                         } else {
                             alert("登入成功！\n將自動為您導向首頁");
                             //var resString = JSON.stringify(response);
-                            localStorage.setItem('id', id);
-                            localStorage.setItem('IDNumber', idNumber);
-                            localStorage.setItem('name', name);
-                            localStorage.setItem('password', pwd);
-                            localStorage.setItem('email', email);
-                            localStorage.setItem('birth', birth);
-                            localStorage.setItem('mobilephone', mobilephone);
-                            localStorage.setItem('address', address);
-                            localStorage.setItem('license', license);
-                            localStorage.setItem('login_times', login_times);
-                            localStorage.setItem('status', status);
-                            document.location.href = "new_index_member.html";
+                            var data = {
+								"id":id,
+								"IDNumber":IDNumber,
+								"name":name,
+								"password":pwd,
+				    			"email": email,
+				    			"birth": birth,
+				    			"mobilephone":mobilephone,
+				    			"address":address,
+				    			"license": license,
+				    			"login_times": login_times,
+				    			"status": status,
+    							}
+    							var data_string = JSON.stringify(data);
+    							console.log(data_string);
+    							localStorage.setItem("User_data", JSON.stringify(data_string));
+                            	document.location.href = "new_index_member.html";
                         }
                 	} catch(TypeError){
                 		alert("會員不存在！");

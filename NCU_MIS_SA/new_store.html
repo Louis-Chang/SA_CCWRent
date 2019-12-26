@@ -37,7 +37,8 @@
                     <li><a href="new_store.html">據點查詢</a></li>
                     <li><a href="new_notice.html">注意事項</a></li>
                 </ul>
-                <input type="button" onclick="javascript:location.href='new_login.html'" value="Login" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
+               <input type="button" id="login_btn" onclick="javascript:location.href='new_login.html'" value="登入" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
+                <input type="button" id="logout_btn" onclick="logout()" value="登出" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
             </nav>
         </div>
         <div class="container">
@@ -128,5 +129,23 @@
 
 
 </body>
-
+<script>
+	$(document).ready(function() {
+	    if(localStorage.hasOwnProperty("User_data")){
+	    	document.getElementById("login_btn").style.visibility = "hidden";
+	    	document.getElementById("logout_btn").style.visibility = "visible";
+	    }
+	    else{
+	    	document.getElementById("login_btn").style.visibility = "visible";
+	    	document.getElementById("logout_btn").style.visibility = "hidden";
+	    }
+	});
+	function logout(){
+		localStorage.removeItem("User_data");
+		alert("您已登出！");
+    	document.getElementById("login_btn").hidden = false;
+    	document.getElementById("logout_btn").hidden = true;
+		document.location.href = "new_store.html";
+	}
+</script>
 </html>

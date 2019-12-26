@@ -161,12 +161,12 @@ public class MemberHelper {
                 String address = rs.getString("address");
                 String license = rs.getString("license");
                 String email = rs.getString("email");
-
                 int login_times = rs.getInt("login_times");
                 String status = rs.getString("status");
+                boolean admin = rs.getBoolean("admin");
                 
                 /** 將每一筆會員資料產生一名新Member物件 */
-                m = new Member(member_id,IDNumber, password, name, birth, mobilephone, address, license, email, login_times, status);
+                m = new Member(member_id,IDNumber, password, name, birth, mobilephone, address, license, email, login_times, status, admin);
                 /** 取出該名會員之資料並封裝至 JSONsonArray 內 */
                 jsa.put(m.getData());
             }
@@ -251,9 +251,10 @@ public class MemberHelper {
                 String email = rs.getString("email");
                 int login_times = rs.getInt("login_times");
                 String status = rs.getString("status");
+                boolean admin = rs.getBoolean("admin");
                 
                 /** 將每一筆會員資料產生一名新Member物件 */
-                m = new Member(member_id,IDNumber, password, name, birth, mobilephone, address, license, email, login_times, status);
+                m = new Member(member_id,IDNumber, password, name, birth, mobilephone, address, license, email, login_times, status, admin);
                 /** 取出該名會員之資料並封裝至 JSONsonArray 內 */
                 jsa.put(m.getData());
             }
@@ -339,9 +340,10 @@ public class MemberHelper {
                 String email = rs.getString("email");
                 int login_times = rs.getInt("login_times");
                 String status = rs.getString("status");
+                boolean admin = rs.getBoolean("admin");
                 
                 /** 將每一筆會員資料產生一名新Member物件 */
-                m = new Member(member_id,idNumber, password, name, birth, mobilephone, address, license, email, login_times, status);
+                m = new Member(member_id,idNumber, password, name, birth, mobilephone, address, license, email, login_times, status, admin);
                 /** 取出該名會員之資料並封裝至 JSONsonArray 內 */
                 jsa.put(m.getData());
             }

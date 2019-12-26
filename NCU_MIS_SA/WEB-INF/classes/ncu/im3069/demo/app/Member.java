@@ -51,6 +51,9 @@ public class Member {
     /** status，會員之組別 */
     private String status;
     
+    /** admin，是否為管理者 */
+    private boolean admin;
+    
     /** mh，MemberHelper之物件與Member相關之資料庫方法（Sigleton） */
     private MemberHelper mh =  MemberHelper.getHelper();
     
@@ -60,6 +63,19 @@ public class Member {
      */
     
     //IDNumber, password, name, birth, mobilephone, address, license, email
+    public Member(String IDNumber, String password, String name, String birth, String mobilephone, String address, String license, String email, boolean admin) {
+    	this.IDNumber = IDNumber;
+    	this.password = password;
+    	this.name = name;
+    	this.birth = birth;
+    	this.mobilephone = mobilephone;
+    	this.address = address;
+    	this.license = license;
+    	this.email = email;
+    	this.admin = admin;
+        update();
+    }
+    
     public Member(String IDNumber, String password, String name, String birth, String mobilephone, String address, String license, String email) {
     	this.IDNumber = IDNumber;
     	this.password = password;
@@ -81,6 +97,23 @@ public class Member {
      * @param password 會員密碼
      * @param name 會員姓名
      */
+    public Member(int id, String IDNumber, String password, String name, String birth, String mobilephone, String address, String license, String email, boolean admin) {
+        this.id = id;
+    	this.IDNumber = IDNumber;
+    	this.password = password;
+    	this.name = name;
+    	this.birth = birth;
+    	this.mobilephone = mobilephone;
+    	this.address = address;
+    	this.license = license;
+    	this.email = email;
+    	this.admin = admin;
+        /** 取回原有資料庫內該名會員之更新時間分鐘數與組別 */
+        getLoginTimesStatus();
+        /** 計算會員之組別 */
+        calcAccName();
+    }
+    
     public Member(int id, String IDNumber, String password, String name, String birth, String mobilephone, String address, String license, String email) {
         this.id = id;
     	this.IDNumber = IDNumber;
@@ -108,7 +141,7 @@ public class Member {
      * @param login_times 更新時間的分鐘數
      * @param status the 會員之組別
      */
-    public Member(int id, String IDNumber, String password, String name, String birth, String mobilephone, String address, String license, String email, int login_times, String status) {
+    public Member(int id, String IDNumber, String password, String name, String birth, String mobilephone, String address, String license, String email, int login_times, String status, boolean admin) {
         this.id = id;
     	this.IDNumber = IDNumber;
     	this.password = password;
@@ -120,6 +153,7 @@ public class Member {
     	this.email = email;
         this.login_times = login_times;
         this.status = status;
+        this.admin = admin;
     }
     
     /**
@@ -163,6 +197,9 @@ public class Member {
         return this.email;
     }
     
+    public boolean getAdmin() {
+    	return this.admin;
+    }
     
     /**
      * 取得更新資料時間之分鐘數
@@ -226,7 +263,7 @@ public class Member {
         jso.put("email", getEmail());
         jso.put("login_times", getLoginTimes());
         jso.put("status", getStatus());
-        
+        jso.put("admin",getAdmin());
         return jso;
     }
     //IDNumber, password, name, birth, mobilephone, address, license, email

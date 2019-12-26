@@ -151,8 +151,70 @@
         })
     });
 
-    function mgr_login() {
-    	document.location.href = "new_members.html";
+    function mgr_login(IDNumber, password) {
+    	$.ajax({
+            type: "GET",
+            url: "api/member.do",
+            crossDomain: true,
+            data: "IDNumber=" + IDNumber,
+            cache: false,
+            dataType: 'json',
+            timeout: 100000,
+            success: function(response) {
+                if (response.status == 200) {
+                	try{
+                		var id = response['response']['data'][0]['id'];
+                		var idNumber = response['response']['data'][0]['IDNumber'];
+                        var pwd = response['response']['data'][0]['password'];
+                        var name = response['response']['data'][0]['name'];
+                        var email = response['response']['data'][0]['email'];
+                        var birth = response['response']['data'][0]['birth'];
+                        var mobilephone = response['response']['data'][0]['mobilephone'];
+                        var address = response['response']['data'][0]['address'];
+                        var license = response['response']['data'][0]['license'];
+                        var login_times = response['response']['data'][0]['login_times'];
+                        var status = response['response']['data'][0]['status'];
+                        var admin = response['response']['data'][0]['admin'];
+                        
+                        if (password != pwd) {
+                            alert("密碼不符！");
+                        }
+                        else if(admin == false){
+                        	alert("您不是管理者！");
+                        }
+                        else {
+                            alert("登入成功！\n將自動為您導向管理者頁面");
+                            //var resString = JSON.stringify(response);
+                            var data = {
+								"id":id,
+								"IDNumber":IDNumber,
+								"name":name,
+								"password":pwd,
+				    			"email": email,
+				    			"birth": birth,
+				    			"mobilephone":mobilephone,
+				    			"address":address,
+				    			"license": license,
+				    			"login_times": login_times,
+				    			"status": status,
+				    			"admin": admin,
+    							}
+    							var data_string = JSON.stringify(data);
+    							console.log(data_string);
+    							localStorage.setItem("User_data", JSON.stringify(data_string));
+    							document.location.href = "new_members.html";
+                        }
+                	} catch(TypeError){
+                		alert("管理者不存在！");
+                	}
+                } 
+                // IDNumber, password, name, birth, mobilephone, address, license, email
+                console.log(response);
+            },
+            error: function() {
+                alert("無法連線到伺服器！");
+            }
+        });
     }
 
     function memLogin(IDNumber, password) {
@@ -177,7 +239,9 @@
                         var address = response['response']['data'][0]['address'];
                         var license = response['response']['data'][0]['license'];
                         var login_times = response['response']['data'][0]['login_times'];
-                        var status = response['response']['data'][0]['login_times'];
+                        var status = response['response']['data'][0]['status'];
+                        var admin = response['response']['data'][0]['admin'];
+                        
                         if (password != pwd) {
                             alert("密碼不符！");
                         } else {
@@ -195,11 +259,13 @@
 				    			"license": license,
 				    			"login_times": login_times,
 				    			"status": status,
+				    			"admin": admin,
     							}
     							var data_string = JSON.stringify(data);
     							console.log(data_string);
     							localStorage.setItem("User_data", JSON.stringify(data_string));
                             	document.location.href = "new_index_member.html";
+                            	console.log(admin);
                         }
                 	} catch(TypeError){
                 		alert("會員不存在！");

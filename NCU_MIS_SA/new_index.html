@@ -30,14 +30,15 @@
         <div id="nav-wrapper">
             <!-- Nav -->
             <nav id="nav">
-                <ul>
+                <ul id="toolBar">
                     <li class="active"><a href="new_index.html">首頁</a></li>
                     <li><a href="new_about.html">關於CCW Rent</a></li>
                     <li><a href="new_cars.html">車輛資訊</a></li>
                     <li><a href="new_store.html">據點查詢</a></li>
                     <li><a href="new_notice.html">注意事項</a></li>
                 </ul>
-                <input type="button" onclick="javascript:location.href='new_login.html'" value="登入" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
+                <input type="button" id="login_btn" onclick="javascript:location.href='new_login.html'" value="登入" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
+                <input type="button" id="logout_btn" onclick="logout()" value="登出" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
             	<input type="button" onclick="javascript:location.href='new_register.html'" value="註冊" style="position: absolute; right: 100px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
             </nav>
         </div>
@@ -120,7 +121,7 @@
                 </header>
                 <ul class="contact">
                     <li><a href="#" class="fa fa-twitter"><span>Twitter</span></a></li>
-                    <li class="active"><a href="#" class="fa fa-facebook"><span>Facebook</span></a></li>
+                    <li class="active"><a href="https://www.facebook.com/kartd0105474" class="fa fa-facebook"><span>Facebook</span></a></li>
                     <li><a href="#" class="fa fa-dribbble"><span>Pinterest</span></a></li>
                     <li><a href="#" class="fa fa-tumblr"><span>Google+</span></a></li>
                 </ul>
@@ -136,5 +137,24 @@
     </div-->
 
 </body>
-
+<script>
+	//判斷是否為已登入狀態
+	//頁面跑出來就要做什麼事情
+	$(document).ready(function() {
+	    if(localStorage.hasOwnProperty("User_data")){
+	    	document.getElementById("login_btn").style.visibility = "hidden";
+	    	document.getElementById("logout_btn").style.visibility = "visible";
+	    	$("#toolBar").append('<li id="memberInfo"><a href="new_memberInfo.html">會員資料管理</a></li>');
+	    }
+	    else{
+	    	document.getElementById("login_btn").style.visibility = "visible";
+	    	document.getElementById("logout_btn").style.visibility = "hidden";
+	    }
+	});
+	function logout(){
+		localStorage.removeItem("User_data");
+		alert("您已登出！")
+		document.location.href = "new_index.html";
+	}
+</script>
 </html>

@@ -38,7 +38,7 @@
                     <li><a href="new_notice.html">注意事項</a></li>
                     <li><a href="new_members.html">會員資料管理</a></li>
                 </ul>
-                <input type="button" onclick="javascript:location.href='new_login.html'" value="登出" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
+                <input type="button" onclick="logout()" value="登出" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
             </nav>
         </div>
         <div class="container">
@@ -75,13 +75,13 @@
                             <tr>
                                 <div class="input text required">
                                     <th><label for="member_password">密碼</label></th>
-                                    <td><input name="password" maxlength="30" type="password" id="member_password" required="required"></td>
+                                    <td><input name="password" maxlength="30" type="password" id="member_password" required="required" style="border: solid 1px #777"></td>
                                 </div>
                             </tr>
                             <tr>
                                 <div class="input text required">
                                     <th><label for="member_confirmpassword">確認密碼</label></th>
-                                    <td><input name="confirmpassword" maxlength="30" type="password" id="member_confirmpassword" required="required"></td>
+                                    <td><input name="confirmpassword" maxlength="30" type="password" id="member_confirmpassword" required="required" style="border: solid 1px #777"></td>
                                 </div>
                             </tr>
                             <tr>
@@ -99,13 +99,13 @@
                             <tr>
                                 <div class="input text required">
                                     <th><label for="member_mobilephone">行動電話</label></th>
-                                    <td><input name="mobilephone" maxlength="10" type="text" id="member_mobilephone" required="required"></td>
+                                    <td><input name="mobilephone" maxlength="10" type="text" id="member_mobilephone" required="required" style="border: solid 1px #777"></td>
                                 </div>
                             </tr>
                             <tr>
                                 <div class="input text required">
                                     <th><label for="member_address">戶籍地址</label></th>
-                                    <td><input name="address" maxlength="30" type="text" size="40" id="member_address" required="required"></td>
+                                    <td><input name="address" maxlength="30" type="text" size="40" id="member_address" required="required" style="border: solid 1px #777"></td>
                                 </div>
                             </tr>
                             <tr>
@@ -176,8 +176,11 @@
     var sql_num = 0;
 
     function updateMember(IDNumber) {
-        var id = localStorage.getItem('id');
-        var idNumber = localStorage.getItem('IDNumber');
+    	let userdata = JSON.parse(localStorage.getItem("User_data"));
+    	userdata = !userdata ? new Array() : userdata;
+    	let data = JSON.parse(userdata);
+        var id = data.id;
+        var idNumber = data.IDNumber;
         var password = $('#member_password').val();
         var confirmpassword = $('#member_confirmpassword').val();
         var name = $('#member_name').val();
@@ -223,15 +226,11 @@
                     //$('#flashMessage').html(response.message);
                     //$('#flashMessage').show();
                     if (response.status == 200) {
-                        localStorage.setItem('id', id);
-                        localStorage.setItem('IDNumber', idNumber);
-                        localStorage.setItem('name', name);
-                        localStorage.setItem('password', password);
-                        localStorage.setItem('email', email);
-                        localStorage.setItem('birth', birth);
-                        localStorage.setItem('mobilephone', mobilephone);
-                        localStorage.setItem('address', address);
-                        localStorage.setItem('license', license);
+                    	data.password = password;
+                    	data.mobilephone = mobilephone;
+                    	data.address = address;
+                    	var data_string = JSON.stringify(data);
+                    	localStorage.setItem("User_data", JSON.stringify(data_string));
                         alert("會員資料更新成功");
                         document.location.href = "new_memberInfo.html";
                     }
@@ -284,14 +283,17 @@
                     document.getElementById('member_email').value = response['response']['data'][0]['email'];
                     document.getElementById('member_login_times').value = response['response']['data'][0]['login_times'];
                     document.getElementById('member_status').value = response['response']['data'][0]['status'];*/
-                    document.getElementById('member_IDNumber').value = localStorage.getItem('IDNumber');
-                    document.getElementById('member_password').value = localStorage.getItem('password');
-                    document.getElementById('member_name').value = localStorage.getItem('name');
-                    document.getElementById('member_birth').value = localStorage.getItem('birth');
-                    document.getElementById('member_mobilephone').value = localStorage.getItem('mobilephone');
-                    document.getElementById('member_address').value = localStorage.getItem('address');
-                    document.getElementById('member_license').value = localStorage.getItem('license');
-                    document.getElementById('member_email').value = localStorage.getItem('email');
+                	let userdata = JSON.parse(localStorage.getItem("User_data"));
+                	userdata = !userdata ? new Array() : userdata;
+                	let data = JSON.parse(userdata);
+                    document.getElementById('member_IDNumber').value = data.IDNumber;
+                    document.getElementById('member_password').value = data.password;
+                    document.getElementById('member_name').value = data.name;
+                    document.getElementById('member_birth').value = data.birth;
+                    document.getElementById('member_mobilephone').value = data.mobilephone;
+                    document.getElementById('member_address').value = data.address;
+                    document.getElementById('member_license').value = data.license;
+                    document.getElementById('member_email').value = data.email;
                 }
                 // IDNumber, password, name, birth, mobilephone, address, license, email
                 // 這邊尚未更改
@@ -306,6 +308,14 @@
     $('#submit').click(function() {
         updateMember(IDNumber)
     });
+    
+    function logout(){
+		localStorage.removeItem("User_data");
+		alert("您已登出！");
+    	document.getElementById("login_btn").hidden = false;
+    	document.getElementById("logout_btn").hidden = true;
+		document.location.href = "new_store.html";
+	}
 
     $(document).ready(function() {
         // 發出GET的AJAX請求取得原本該會員的資料

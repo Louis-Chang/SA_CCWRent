@@ -23,8 +23,6 @@
 /*********************************************************************************/
 
 body {
-    margin: 0;
-    padding: 0;
     background: #161616;
 }
 
@@ -105,7 +103,7 @@ hr {
 blockquote {
     border-left: solid 0.5em #ddd;
     padding: 1em 0 1em 2em;
-    font-style: italic;
+   
 }
 
 p,
@@ -114,7 +112,8 @@ ol,
 dl,
 table {
     margin-bottom: 1em;
-    padding: 10px;
+    padding-left: 50px;
+    list-style-type: circle;
 }
 
 th {
@@ -220,7 +219,7 @@ article:last-child {
 ul.default {
     margin: 0;
     padding: 0em 0em 1.5em 0em;
-    list-style: none;
+    list-style-type: circle;
 }
 
 ul.default li {
@@ -242,6 +241,7 @@ ul.style li {
     padding: 2em 0em 1.5em 0em;
     border-top: 1px solid;
     border-color: rgba(0, 0, 0, .1);
+  
 }
 
 ul.style li:first-child {
@@ -270,7 +270,6 @@ ul.style .first {
     padding-top: 0px;
     border-top: none;
 }
-
 
 /* Buttons */
 
@@ -364,7 +363,7 @@ ul.style .first {
 .fa-ul {
     padding-left: 0;
     margin-left: 2.142857142857143em;
-    list-style-type: none
+    list-style-type: circle;
 }
 
 .fa-ul>li {
@@ -2073,19 +2072,23 @@ ul.style .first {
 
 ul.contact {
     padding: 1.5em 0 0 0;
-    list-style: none;
+    list-style: circle;
     cursor: default;
 }
 
 ul.contact li {
     display: inline-block;
     margin: 0 1em;
+    list-style-type:circle;
+    
+   
 }
 
 ul.contact li span {
     display: none;
     margin: 0;
-    padding: 0;
+    padding: 10px;
+    list-style-type:circle;
 }
 
 ul.contact li a {
@@ -2097,6 +2100,7 @@ ul.contact li a {
     -o-transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out;
     -ms-transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out;
     transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out;
+    list-style-type:circle;
 }
 
 ul.contact li a:hover {

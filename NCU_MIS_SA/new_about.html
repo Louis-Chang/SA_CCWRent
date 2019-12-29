@@ -118,6 +118,7 @@
 	    if(localStorage.hasOwnProperty("User_data")){
 	    	document.getElementById("login_btn").style.visibility = "hidden";
 	    	document.getElementById("logout_btn").style.visibility = "visible";
+	    	$("#toolBar").append('<li id="memberInfo"><a href="new_memberInfo.html">會員資料管理</a></li>');
 	    }
 	    else{
 	    	document.getElementById("login_btn").style.visibility = "visible";

@@ -39,7 +39,7 @@
                 </ul>
                 <input type="button" id="login_btn" onclick="javascript:location.href='new_login.html'" value="登入" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
                 <input type="button" id="logout_btn" onclick="logout()" value="登出" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
-            	<input type="button" onclick="javascript:location.href='new_register.html'" value="註冊" style="position: absolute; right: 100px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
+            	<input type="button" id="register_btn" onclick="javascript:location.href='new_register.html'" value="註冊" style="position: absolute; right: 100px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
             </nav>
         </div>
         <div class="container">
@@ -144,11 +144,13 @@
 	    if(localStorage.hasOwnProperty("User_data")){
 	    	document.getElementById("login_btn").style.visibility = "hidden";
 	    	document.getElementById("logout_btn").style.visibility = "visible";
+	    	document.getElementById("register_btn").style.visibility = "hidden";
 	    	$("#toolBar").append('<li id="memberInfo"><a href="new_memberInfo.html">會員資料管理</a></li>');
 	    }
 	    else{
 	    	document.getElementById("login_btn").style.visibility = "visible";
 	    	document.getElementById("logout_btn").style.visibility = "hidden";
+	    	document.getElementById("register_btn").style.visibility = "visible";
 	    }
 	});
 	function logout(){

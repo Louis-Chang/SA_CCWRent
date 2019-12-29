@@ -60,24 +60,21 @@
                 </header>
 
                 <body>
-                    <div style="position: relative; left: 40px; top: 10px;">
-                        <h3>用關鍵字搜尋據點</h3>
-                        <input type="text">
-                        <input type="button" value="搜尋據點" style="font-size: 16px; idth: 100px; height: 100px;">
-                    </div>
-                    <div style="position: relative; left: 40px; top: 30px;">
+                    <div style="position: relative; left: 10px; top: 5px; ">
                         <h3>用條件查詢據點</h3>
                         <form>
-                            <select>
+                            <select id="cityBar">
 								<option>台北市</option>
 								<option>桃園市</option>
 								<option>台中市</option>
 								<option>台南市</option>
 								<option>高雄市</option>
 							</select>
+							<input type="button" id="submit" value="送出" style="font-size: 30px; width: 60px; height: 50px;">
                         </form>
-                        <input type="checkbox">全選
                     </div>
+                    <table id="table" style="width: 100%; padding: 5px;">
+                    </table>
                 </body>
 
             </section>
@@ -122,6 +119,7 @@
 
 </body>
 <script>
+	var city;
 	$(document).ready(function() {
 	    if(localStorage.hasOwnProperty("User_data")){
 	    	document.getElementById("login_btn").style.visibility = "hidden";
@@ -133,6 +131,7 @@
 	    	document.getElementById("logout_btn").style.visibility = "hidden";
 	    }
 	});
+	
 	function logout(){
 		localStorage.removeItem("User_data");
 		alert("您已登出！");
@@ -140,5 +139,43 @@
     	document.getElementById("logout_btn").hidden = true;
 		document.location.href = "new_store.html";
 	}
+	
+	function getStoreByCity(){
+        $.ajax({
+            type: "GET",
+            url: "api/store.do",
+            crossDomain: true,
+            data: "city=" + city,
+            cache: false,
+            dataType: 'json',
+            timeout: 100000,
+            success: function(response) {
+                if (response.status == 200) {
+                	updateTable(response.response.data);
+                }
+                console.log(response);
+            },
+            error: function() {
+                alert("無法連線到伺服器！");
+            }
+        });
+	}
+	
+    function updateTable(data) {
+        $("#table").empty();
+        var table_html = "<tr><th>站名</th><th>地址</th></tr>";
+        $.each(data, function(index, value) {
+            table_html += '<tr><td>' + value['name'] + '</td>';
+            table_html += '<td>' + value['address'] + '</td></tr>';
+        })
+
+        $("#table").append(table_html);
+    }
+
+	
+	$('#submit').click(function() {
+		city = document.getElementById("cityBar").value;
+		getStoreByCity();
+	 });
 </script>
 </html>

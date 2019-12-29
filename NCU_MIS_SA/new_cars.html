@@ -170,18 +170,18 @@
     	let inner_html = '';
     	inner_html += '<div class="col-md-4">';
    		inner_html += '<div class="card-header">';
-   		inner_html += '<h4 class="font-weight-normal text-center text-truncate">' + data.name + '</h4>';
+   		inner_html += '<h2 class="font-weight-normal text-center text-truncate"><B>' + data.name + '</B></h2>';
  		inner_html += '</div>';
  		inner_html += '<div class="card mb-4 shadow-sm">';
  		inner_html += '<img src="statics/img/product/' + data.image + '" width="100%">';
 		inner_html += '<div class="card-body">';
 		inner_html += '<h1 class="card-title pricing-card-title">$' + data.price + ' <small class="text-muted"> 元/日 </small></h1>';
 		inner_html += '<h5 class="card-text">排氣量:' + data.cc + 'CC' +'</h5>' + '<h5 class="card-text">' + '座位數:' + data.seat + '</h5>';
-		inner_html += '<p class="card-text">' + data.describe + '</p>';
+		inner_html += '<h5 class="card-text">車型 ：' + data.describe + '</h5>';
 		inner_html += '<div class="d-flex justify-content-between align-items-center">';
 		inner_html += '<div class="btn-group">';
 		inner_html += '<button id="add_cart_' + data.id + '" name="add_cart" type="button" class="btn btn-lg btn-block btn-outline-primary">加入購物車</button>';
-		inner_html += '</div><small class="text-muted">id: ' + data.id + '</small>';
+		inner_html += '</div>';
 		inner_html += '</div></div></div></div>';
     	
 		return inner_html;
@@ -246,7 +246,7 @@
     	    $('#' + id).prop('disabled', true);
     	    $('#' + id).addClass('disabled');
     	    $('#' + id).html('已租賃');
-    	    window.location.replace("http://localhost:8090/NCU_MIS_SA/new_cart.html")
+    		document.location.href = "new_cart.html";
     	}
     	else {
     		$('#' + id).prop('disabled', false);

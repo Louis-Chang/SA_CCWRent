@@ -156,10 +156,12 @@
 	
     function updateTable(data) {
         $("#table").empty();
-        var table_html = "<tr><th>站名</th><th>地址</th></tr>";
+        var table_html = "<tr><th>縣市</th><th>站名</th><th>地址</th><th>電話</th></tr>";
         $.each(data, function(index, value) {
-            table_html += '<tr><td>' + value['name'] + '</td>';
-            table_html += '<td>' + value['address'] + '</td></tr>';
+        	table_html += '<tr><td>' + document.getElementById("cityBar").value + '</td>';
+            table_html += '<td>' + value['name'] + '</td>';
+            table_html += '<td>' + value['address'] + '</td>';
+            table_html += '<td>' + value['phone'] + '</td></tr>'
         })
 
         $("#table").append(table_html);

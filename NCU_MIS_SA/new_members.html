@@ -8,7 +8,7 @@
 <!--  -->
 
 <head>
-    <title>會員資料管理</title>
+    <title>會員及管理者資料管理</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -32,7 +32,7 @@
             <!-- Nav -->
             <nav id="nav">
                 <ul>
-					<li><a href="new_members.html">會員管理</a></li>
+					<li><a href="new_members.html">會員及管理者資料管理</a></li>
                     <li><a href="new_orderList.html">訂單管理</a></li>
                 </ul>
                 <input type="button" onclick="logout()" value="登出" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
@@ -54,12 +54,13 @@
         <div id="content" class="container">
             <section>
                 <header>
-                    <h2>管理者模式/會員資料管理</h2>
+                    <h2>管理者模式/會員及管理者資料管理</h2>
                 </header>
 
                 <body>
                     <table id="table" style="width: 100%; padding: 1px;">
                         <tr>
+                        	<th>Admin</th>
                             <th>身分證字號</th>
                             <th>姓名</th>
                             <th>電子郵件</th>
@@ -71,6 +72,7 @@
                             <th>功能</th>
                         </tr>
                     </table>
+                    <input type="button" onclick="javascript:alert(' ')" value="新增管理者" style="position: absolute; right: 120px; top: 90px; color: white; display: inline-block; background: #80BA8E;">
                 </body>
             </section>
         </div>
@@ -116,35 +118,40 @@
                 // 全域變數紀錄SQL指令下的次數
                 var sql_num = 0;
                 function deleteMember(id) {
-                    var check = window.confirm("確認刪除會員？");
-                    if (check == true) {
-                        console.log("You pressed OK!");
-                        var request = {'id': id};
-                        var data_string = JSON.stringify(request);
-                        $.ajax({
-                            type: "DELETE",
-                            url: "api/member.do",
-                            crossDomain: true,
-                            data: data_string,
-                            cache: false,
-                            dataType: 'json',
-                            timeout: 5000,
-                            success: function (response) {
-                                if(response.status == 200){
-                                    $("#flashMessage").html("成功! 已經成功刪除會員...");
-                                    $("#flashMessage").show();
-                                    getAllMember();
+                	if(id == 1){
+                		alert("root管理者不能被刪除！");
+                	}
+                	else{
+                		var check = window.confirm("確認刪除會員？");
+                        if (check == true) {
+                            console.log("You pressed OK!");
+                            var request = {'id': id};
+                            var data_string = JSON.stringify(request);
+                            $.ajax({
+                                type: "DELETE",
+                                url: "api/member.do",
+                                crossDomain: true,
+                                data: data_string,
+                                cache: false,
+                                dataType: 'json',
+                                timeout: 5000,
+                                success: function (response) {
+                                    if(response.status == 200){
+                                        $("#flashMessage").html("成功! 已經成功刪除會員...");
+                                        $("#flashMessage").show();
+                                        getAllMember();
+                                    }
+                                    console.log(response);
+                                },
+                                error: function () {
+                                    alert("無法連線到伺服器！");
                                 }
-                                console.log(response);
-                            },
-                            error: function () {
-                                alert("無法連線到伺服器！");
-                            }
-                        });
-                    }
-                    else {
-                        console.log("You pressed Cancel!");
-                    }
+                            });
+                        }
+                        else {
+                            console.log("You pressed Cancel!");
+                        }
+                	}
                 }
 
                 function getAllMember() {
@@ -172,15 +179,16 @@
                 // 更新會員列表表格
                 function updateTable(data) {
                     $("#table > tbody").empty();
-                    var table_html = "<tr><th>身分證字號</th><th>姓名</th><th>電子郵件</th><th>生日</th><th>手機</th><th>地址</th><th>汽車駕照管轄編號</th><th>功能</th></tr>";
+                    var table_html = "<tr><th>Admin</th><th>身分證字號</th><th>姓名</th><th>電子郵件</th><th>生日</th><th>手機</th><th>地址</th><th>功能</th></tr>";
                     $.each(data, function(index, value) {
-                        table_html += '<tr><td scope="row">' + value['IDNumber'] + '</td>';
+                        table_html += '<tr><td scope="row">' + value['admin'] + '</td>';
+                        table_html += '<td>' + value['IDNumber'] + '</td>';
                         table_html += '<td>' + value['name'] + '</td>';
                         table_html += '<td>' + value['email'] + '</td>';
                         table_html += '<td>' + value['birth'] + '</td>';
                         table_html += '<td>' + value['mobilephone'] + '</td>';
                         table_html += '<td>' + value['address'] + '</td>';
-                        table_html += '<td>' + value['license'] + '</td>';
+                        //table_html += '<td>' + value['license'] + '</td>';
                         //table_html += '<td>' + value['created'] + '</td>';
                         table_html += '<td>' + '<a href="new_edit.html?id=' + value['id'] + '">編輯</a> | ';
                         table_html += '<a href="javascript: deleteMember(' + value['id'] + ');">刪除</a></td></tr>';

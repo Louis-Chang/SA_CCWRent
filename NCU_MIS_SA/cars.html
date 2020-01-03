@@ -35,13 +35,14 @@
 			<!-- Nav -->
 			<nav id="nav">
 				<ul id="toolBar">
-					<li class="active"><a href="new_index.html">首頁</a></li>
-					<li><a href="new_about.html">關於CCW Rent</a></li>
-					<li><a href="new_cars.html">車輛資訊</a></li>
-					<li><a href="new_store.html">據點查詢</a></li>
-					<li><a href="new_notice.html">注意事項</a></li>
+					<li class="active"><a href="index.html">首頁</a></li>
+					<li><a href="about.html">關於CCW Rent</a></li>
+					<li><a href="cars.html">車輛資訊</a></li>
+					<li><a href="store.html">據點查詢</a></li>
+					<li><a href="notice.html">注意事項</a></li>
 				</ul>
-				<input type="button" id="login_btn" onclick="javascript:location.href='new_login.html'" value="登入" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
+				<input type="button" id="register_btn" onclick="javascript:location.href='register.html'" value="註冊" style="position: absolute; right: 100px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
+				<input type="button" id="login_btn" onclick="javascript:location.href='login.html'" value="登入" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
                 <input type="button" id="logout_btn" onclick="logout()" value="登出" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
 			</nav>
 		</div>
@@ -61,7 +62,7 @@
 			<section>
 				<header>
 					<h2>
-						<a href="new_index.html">首頁</a>／車輛資訊
+						<a href="index.html">首頁</a>／車輛資訊
 					</h2>
 				</header>
 
@@ -121,7 +122,7 @@
 	    if(localStorage.hasOwnProperty("User_data")){
 	    	document.getElementById("login_btn").style.visibility = "hidden";
 	    	document.getElementById("logout_btn").style.visibility = "visible";
-	    	$("#toolBar").append('<li id="memberInfo"><a href="new_memberInfo.html">會員資料管理</a></li>');
+	    	$("#toolBar").append('<li id="memberInfo"><a href="memberInfo.html">會員資料管理</a></li>');
 	    }
 	    else{
 	    	document.getElementById("login_btn").style.visibility = "visible";
@@ -133,7 +134,7 @@
 		alert("您已登出！");
 		document.getElementById("login_btn").hidden = false;
 		document.getElementById("logout_btn").hidden = true;
-		document.location.href = "new_cars.html";
+		document.location.href = "cars.html";
 	}
     var [client_cart_obj, client_cart_amount]  = getCartDataFromClient();
     
@@ -197,6 +198,7 @@
     	    }
     	    else{
     	    	alert("請先登入！");
+    	    	document.location.href = "login.html";
     	    }
 
 
@@ -246,7 +248,7 @@
     	    $('#' + id).prop('disabled', true);
     	    $('#' + id).addClass('disabled');
     	    $('#' + id).html('已租賃');
-    		document.location.href = "new_cart.html";
+    		document.location.href = "cart.html";
     	}
     	else {
     		$('#' + id).prop('disabled', false);

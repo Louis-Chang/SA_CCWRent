@@ -1,234 +1,330 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+<!--
+	Linear by TEMPLATED
+    templated.co @templatedco
+    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>CakePHP: the rapid development php framework: Members</title>
-    <link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
-    <link href="statics/icon/favicon.ico" type="image/x-icon" rel="shortcut icon">
-    <link rel="stylesheet" type="text/css" href="statics/css/cake.generic.css">
-
-    <script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <title>會員資料修改</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700,500,900' rel='stylesheet' type='text/css'>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/skel.min.js"></script>
+    <script src="js/skel-panels.min.js"></script>
+    <script src="js/init.js"></script>
+    <noscript>
+			<link rel="stylesheet" href="css/skel-noscript.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-desktop.css" />
+		</noscript>
 </head>
 
 <body>
-    <div id="container">
-        <div id="header">
-            <h1><a href="http://cakephp.org/">CakePHP: the rapid development php framework</a></h1>
+
+    <!-- Header -->
+    <div id="header">
+        <div id="nav-wrapper">
+            <!-- Nav -->
+            <nav id="nav">
+                <ul>
+                    <li class="active"><a href="index.html">首頁</a></li>
+                    <li><a href="about.html">關於CCW Rent</a></li>
+                    <li><a href="cars.html">車輛資訊</a></li>
+                    <li><a href="store.html">據點查詢</a></li>
+                    <li><a href="notice.html">注意事項</a></li>
+                    <li><a href="members.html">會員資料管理</a></li>
+                </ul>
+                <input type="button" onclick="logout()" value="登出" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
+            </nav>
         </div>
-        <div id="content">
-            <h2>更新會員資料</h2>
-            <a href="index.html">會員清單</a>
-            <a href="product.html">購物車模組</a>
+        <div class="container">
 
-            <div id="flashMessage" class="message" style="display: none;"></div>
-
-            <form id="form" accept-charset="utf-8">
-                <div style="display:none;"><input type="hidden" name="_method" value="POST"></div>  
-                <!--**
-                	**
-                	**-->
-                <div class="input text required">
-                    <label for="member_IDNumber">身分證字號</label>
-                    <input name="IDNumber" maxlength="10" type="text" id="member_IDNumber" required="required" disabled>
-                </div>
-                <div class="input password required">
-                    <label for="member_password">密碼</label>
-                    <input name="password" maxlength="30" type="password" id="member_password" required="required">
-                </div>
-                <div class="input password required">
-                    <label for="member_confirmpassword">確認密碼</label>
-                    <input name="confirmpassword" maxlength="30" type="password" id="member_confirmpassword" required="required">
-                </div>
-                <div class="input text required">
-                    <label for="member_name">姓名</label>
-                    <input name="name" maxlength="30" type="text" id="member_name" required="required" disabled>
-                </div>
-                <div class="input text required">
-                    <label for="member_birth">出生年月日</label>
-                    <input name="birth" maxlength="10" type="text" id="member_birth" required="required" disabled>
-                </div>
-                <div class="input text required">
-                    <label for="member_mobilephone">行動電話</label>
-                    <input name="mobilephone" maxlength="10" type="text" id="member_mobilephone" required="required">
-                </div>
-                <div class="input text required">
-                    <label for="member_address">戶籍地址</label>
-                    <input name="address" maxlength="30" type="text" id="member_address" required="required">
-                </div>                
-                <div class="input text required">
-                    <label for="member_license">汽車駕照管轄編號</label>
-                    <input name="license" maxlength="13" type="text" id="member_license" required="required" disabled>
-                </div>
-                <div class="input email required">
-                    <label for="member_email">電郵</label>
-                    <input name="email" maxlength="50" type="email" id="member_email" required="required" disabled>
-                </div>        
-                <!--**
-                	**
-                	**-->
-                <div class="input text">
-                    <label for="member_login_times">更新時間</label>
-                    <input name="login_times" type="text" id="member_login_times" disabled>
-                </div>
-                <div class="input text">
-                    <label for="member_status">會員組別</label>
-                    <input name="status" type="text" id="member_status" disabled>
-                </div>
-                <div class="submit"><input type="button" value="更新" id="submit"></div>
-            </form>
-
-            <script type="text/javascript">
-                // 取得網址參數
-                var url_string = window.location.href;
-                var url = new URL(url_string);
-                var id = url.searchParams.get("id");
-                var sql_num = 0;
-
-                function updateMember(id) {       
-                    var IDNumber = $('#member_IDNumber').val();
-                    var password = $('#member_password').val();
-                    var confirmpassword = $('#member_confirmpassword').val();
-                    var name = $('#member_name').val();
-                    var birth = $('#member_birth').val();
-                    var mobilephone = $('#member_mobilephone').val();
-                    var address = $('#member_address').val();
-                    var license = $('#member_license').val();
-                    var email = $('#member_email').val();
-                    
-                    var password_rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-
-                    if(!password_rule.test(password)) {
-                        alert("密碼格式不符，長度至少8，且至少包含一個數字和英文字母！");
-                    }
-                    else if(password != confirmpassword) {
-                        alert("密碼與確認密碼不相同，請重新輸入");
-                    }
-                    else {
-                        // 將資料組成JSON格式
-                        var data_object = {
-                            "id": id,
-                        	"IDNumber": IDNumber,
-                        	"password": password,
-                            "name": name,
-                            "birth": birth,
-                            "mobilephone": mobilephone,
-                            "address": address,
-                            "license": license,
-                            "email": email
-                        };
-
-                        // 將JSON格式轉換成字串
-                        var data_string = JSON.stringify(data_object);
-
-                        // 發出POST的PUT請求
-                        $.ajax({
-                                type: "PUT",
-                                url: "api/member.do",
-                                data: data_string,
-                                crossDomain: true,
-                                cache: false,
-                                dataType: 'json',
-                                timeout: 100000,
-                                success: function (response) {
-                                    $('#flashMessage').html(response.message);
-                                    $('#flashMessage').show();
-                                    if(response.status == 200){
-                                        updateSQLTable(response.response);
-                                        getMember();
-                                    }
-                                },
-                                error: function () {
-                                    alert("無法連線到伺服器！");
-                                }
-                        });
-                    }
-                }
-
-                // 更新SQL指令歷史表格
-                function updateSQLTable(data) {
-                    var time = (data.time / 1000000).toFixed(2);
-                    var table_html = "";
-                    
-                    sql_num += 1
-
-                    table_html += '<tr>';
-                    table_html += '<td>' + sql_num + '</td>';
-                    table_html += '<td>' + data.sql + '</td>';
-                    table_html += '<td style="text-align: right">' + '0' + '</td>';
-                    table_html += '<td style="text-align: right">' + data.row + '</td>';
-                    table_html += '<td style="text-align: right">' + data.row + '</td>';
-                    table_html += '<td style="text-align: right">' + time + '</td>';
-                    table_html += '</tr>';
-                    $("#sql_log > tbody").append(table_html);
-                    $("#sql_summary").html("(default) " + data.row + " queries took " + time + " ms");
-                }
-
-                function getMember() {
-                    $.ajax({
-                        type: "GET",
-                        url: "api/member.do",
-                        crossDomain: true,
-                        data: "id=" + id,
-                        cache: false,
-                        dataType: 'json',
-                        timeout: 100000,
-                        success: function (response) {
-                            if(response.status == 200){
-                            	updateSQLTable(response.response);
-                            	document.getElementById('member_IDNumber').value = response['response']['data'][0]['IDNumber'];
-                            	document.getElementById('member_password').value = response['response']['data'][0]['password'];
-                            	document.getElementById('member_name').value = response['response']['data'][0]['name'];
-                            	document.getElementById('member_birth').value = response['response']['data'][0]['birth'];
-                            	document.getElementById('member_mobilephone').value = response['response']['data'][0]['mobilephone'];
-                            	document.getElementById('member_address').value = response['response']['data'][0]['address'];
-                            	document.getElementById('member_license').value = response['response']['data'][0]['license'];
-                            	document.getElementById('member_email').value = response['response']['data'][0]['email'];
-                            	document.getElementById('member_login_times').value = response['response']['data'][0]['login_times'];
-                            	document.getElementById('member_status').value = response['response']['data'][0]['status'];
-                            }
-                        	// IDNumber, password, name, birth, mobilephone, address, license, email
-                        	// 這邊尚未更改
-                            console.log(response);
-                        },
-                        error: function () {
-                            alert("無法連線到伺服器！");
-                        }
-                    });
-                }
-
-                $('#submit').click(function() {
-                    updateMember(id)
-                });
-                
-                $(document).ready(function() {
-                	// 發出GET的AJAX請求取得原本該會員的資料
-                 	$("#sql_log > tbody").empty();
-                    getMember();
-                });
-            </script>
-        </div>
-        <div id="footer">
-            <a href="http://www.cakephp.org/" target="_blank" id="cake-powered"><img src="statics/img/cake.power.gif" alt="CakePHP: the rapid development php framework" border="0"></a>
-            <p>CakePHP 2.6.10</p>
+            <!-- Logo -->
+            <div id="logo">
+                <a href="#" style="color: rgba(0, 0, 0, 0);">CCW RENT</a>
+            </div>
         </div>
     </div>
+    <!-- Header -->
 
-    <table class="cake-sql-log" id="sql_log" summary="Cake SQL Log" cellspacing="0">
-        <caption id="sql_summary">(default) 0 query took 0 ms</caption>
-        <thead>
-            <tr>
-                <th>Nr</th>
-                <th>Query</th>
-                <th>Error</th>
-                <th>Affected</th>
-                <th>Num. rows</th>
-                <th>Took (ms)</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+    <!-- Main -->
+    <div id="main">
+        <div id="content" class="container">
+            <section>
+                <header>
+                    <h2>會員資料修改</h2>
+                </header>
+
+                <body>
+                    <form id="form" accept-charset="utf-8">
+                        <div style="display:none;"><input type="hidden" name="_method" value="POST"></div>
+                        <!--**
+                            **
+                            **-->
+                        <table style="width: 100%;">
+                            <tr>
+                                <div class="input text required">
+                                    <th><label for="member_IDNumber">身分證字號</label></th>
+                                    <td><input name="IDNumber" maxlength="10" type="text" id="member_IDNumber" required="required" disabled></td>
+                                </div>
+                            </tr>
+                            <tr>
+                                <div class="input text required">
+                                    <th><label for="member_password">密碼</label></th>
+                                    <td><input name="password" maxlength="30" type="password" id="member_password" required="required" style="border: solid 1px #777"></td>
+                                </div>
+                            </tr>
+                            <tr>
+                                <div class="input text required">
+                                    <th><label for="member_confirmpassword">確認密碼</label></th>
+                                    <td><input name="confirmpassword" maxlength="30" type="password" id="member_confirmpassword" required="required" style="border: solid 1px #777"></td>
+                                </div>
+                            </tr>
+                            <tr>
+                                <div class="input text required">
+                                    <th><label for="member_name">姓名</label></th>
+                                    <td><input name="name" maxlength="30" type="text" id="member_name" required="required" disabled></td>
+                                </div>
+                            </tr>
+                            <tr>
+                                <div class="input text required">
+                                    <th><label for="member_birth">出生年月日</label></th>
+                                    <td><input name="birth" maxlength="10" type="text" id="member_birth" required="required" disabled></td>
+                                </div>
+                            </tr>
+                            <tr>
+                                <div class="input text required">
+                                    <th><label for="member_mobilephone">行動電話</label></th>
+                                    <td><input name="mobilephone" maxlength="10" type="text" id="member_mobilephone" required="required" style="border: solid 1px #777"></td>
+                                </div>
+                            </tr>
+                            <tr>
+                                <div class="input text required">
+                                    <th><label for="member_address">戶籍地址</label></th>
+                                    <td><input name="address" maxlength="30" type="text" size="40" id="member_address" required="required" style="border: solid 1px #777"></td>
+                                </div>
+                            </tr>
+                            <tr>
+                                <div class="input text required">
+                                    <th><label for="member_license">汽車駕照管轄編號</label></th>
+                                    <td><input name="license" maxlength="13" type="text" id="member_license" required="required" disabled></td>
+                                </div>
+                            </tr>
+                            <tr>
+                                <div class="input text required">
+                                    <th><label for="member_email">電子郵件</label></th>
+                                    <td><input name="email" maxlength="50" type="email" size="40" id="member_email" required="required" disabled></td>
+                                </div>
+                            </tr>
+                            <div class="submit"><input type="button" value="更新" id="submit" style="position: absolute; right: 40px; bottom: 20px; color: white; display: inline-block; background: #80BA8E;"></div>
+                    </form>
+                    </table>
+
+                </body>
+            </section>
+        </div>
+    </div>
+    <!-- /Main -->
+
+    <!-- Tweet -->
+    <div id="tweet">
+        <div class="container" style="color: white; font-size: 20px;">
+            <section>
+                <p>全台據點隨你搜<br>現在就來CCW RENT一下吧</p>
+            </section>
+        </div>
+    </div>
+    <!-- /Tweet -->
+
+    <!-- Footer -->
+    <div id="footer">
+        <div class="container">
+            <section>
+                <header>
+                    <h2>聯絡方式： <a href="tel:+886-975-3760458">0975376458</a></h2>
+                </header>
+                <ul class="contact">
+                    <li><a href="#" class="fa fa-twitter"><span>Twitter</span></a></li>
+                    <li class="active"><a href="#" class="fa fa-facebook"><span>Facebook</span></a></li>
+                    <li><a href="#" class="fa fa-dribbble"><span>Pinterest</span></a></li>
+                    <li><a href="#" class="fa fa-tumblr"><span>Google+</span></a></li>
+                </ul>
+            </section>
+        </div>
+    </div>
+    <!-- /Footer -->
+
+    <!-- Copyright -->
+    <!--div id="copyright">
+        <div class="container">
+            Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
+        </div>
+    </div-->
+
+
 </body>
+<script type="text/javascript">
+    // 取得網址參數
+    var url_string = window.location.href;
+    var url = new URL(url_string);
+    var IDNumber = url.searchParams.get("IDNumber");
+    var id = url.searchParams.get("id");
+    var sql_num = 0;
+
+    function updateMember(IDNumber) {
+    	let userdata = JSON.parse(localStorage.getItem("User_data"));
+    	userdata = !userdata ? new Array() : userdata;
+    	let data = JSON.parse(userdata);
+        var id = data.id;
+        var idNumber = data.IDNumber;
+        var password = $('#member_password').val();
+        var confirmpassword = $('#member_confirmpassword').val();
+        var name = $('#member_name').val();
+        var birth = $('#member_birth').val();
+        var mobilephone = $('#member_mobilephone').val();
+        var address = $('#member_address').val();
+        var license = $('#member_license').val();
+        var email = $('#member_email').val();
+        var password_rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        var mobilephone_rule = /^[09]{2}[0-9]{8}$/;
+
+        if (!password_rule.test(password)) {
+            alert("密碼格式不符，長度至少8，且至少包含一個數字和英文字母！");
+        } else if (password != confirmpassword) {
+            alert("密碼與確認密碼不相同，請重新輸入");
+        } else if(!mobilephone_rule.test(mobilephone)){
+        	alert("手機號碼格式不符！");
+        } else {
+            // 將資料組成JSON格式
+            var data_object = {
+                "id": id,
+                "IDNumber": idNumber,
+                "password": password,
+                "name": name,
+                "birth": birth,
+                "mobilephone": mobilephone,
+                "address": address,
+                "license": license,
+                "email": email
+            };
+
+            // 將JSON格式轉換成字串
+            var data_string = JSON.stringify(data_object);
+            console.log(data_string);
+
+            // 發出POST的PUT請求
+            $.ajax({
+                type: "PUT",
+                url: "api/member.do",
+                data: data_string,
+                crossDomain: true,
+                cache: false,
+                dataType: 'json',
+                timeout: 100000,
+                success: function(response) {
+                    //$('#flashMessage').html(response.message);
+                    //$('#flashMessage').show();
+                    if (response.status == 200) {
+                    	data.password = password;
+                    	data.mobilephone = mobilephone;
+                    	data.address = address;
+                    	var data_string = JSON.stringify(data);
+                    	localStorage.setItem("User_data", JSON.stringify(data_string));
+                        alert("會員資料更新成功");
+                        document.location.href = "memberInfo.html";
+                    }
+                },
+                error: function() {
+                    alert("無法連線到伺服器！");
+                }
+            });
+        }
+    }
+
+    // 更新SQL指令歷史表格
+    function updateSQLTable(data) {
+        var time = (data.time / 1000000).toFixed(2);
+        var table_html = "";
+
+        sql_num += 1
+
+        table_html += '<tr>';
+        table_html += '<td>' + sql_num + '</td>';
+        table_html += '<td>' + data.sql + '</td>';
+        table_html += '<td style="text-align: right">' + '0' + '</td>';
+        table_html += '<td style="text-align: right">' + data.row + '</td>';
+        table_html += '<td style="text-align: right">' + data.row + '</td>';
+        table_html += '<td style="text-align: right">' + time + '</td>';
+        table_html += '</tr>';
+        $("#sql_log > tbody").append(table_html);
+        $("#sql_summary").html("(default) " + data.row + " queries took " + time + " ms");
+    }
+
+    function getMember() {
+        $.ajax({
+            type: "GET",
+            url: "api/member.do",
+            crossDomain: true,
+            data: "IDNumber=" + IDNumber,
+            cache: false,
+            dataType: 'json',
+            timeout: 100000,
+            success: function(response) {
+                if (response.status == 200) {
+                    updateSQLTable(response.response);
+                    /*document.getElementById('member_IDNumber').value = response['response']['data'][0]['IDNumber'];
+                    document.getElementById('member_password').value = response['response']['data'][0]['password'];
+                    document.getElementById('member_name').value = response['response']['data'][0]['name'];
+                    document.getElementById('member_birth').value = response['response']['data'][0]['birth'];
+                    document.getElementById('member_mobilephone').value = response['response']['data'][0]['mobilephone'];
+                    document.getElementById('member_address').value = response['response']['data'][0]['address'];
+                    document.getElementById('member_license').value = response['response']['data'][0]['license'];
+                    document.getElementById('member_email').value = response['response']['data'][0]['email'];
+                    document.getElementById('member_login_times').value = response['response']['data'][0]['login_times'];
+                    document.getElementById('member_status').value = response['response']['data'][0]['status'];*/
+                	let userdata = JSON.parse(localStorage.getItem("User_data"));
+                	userdata = !userdata ? new Array() : userdata;
+                	let data = JSON.parse(userdata);
+                    document.getElementById('member_IDNumber').value = data.IDNumber;
+                    document.getElementById('member_password').value = data.password;
+                    document.getElementById('member_name').value = data.name;
+                    document.getElementById('member_birth').value = data.birth;
+                    document.getElementById('member_mobilephone').value = data.mobilephone;
+                    document.getElementById('member_address').value = data.address;
+                    document.getElementById('member_license').value = data.license;
+                    document.getElementById('member_email').value = data.email;
+                }
+                // IDNumber, password, name, birth, mobilephone, address, license, email
+                // 這邊尚未更改
+                console.log(response);
+            },
+            error: function() {
+                alert("無法連線到伺服器！");
+            }
+        });
+    }
+
+    $('#submit').click(function() {
+        updateMember(IDNumber)
+    });
+    
+    function logout(){
+		localStorage.removeItem("User_data");
+		alert("您已登出！");
+    	document.getElementById("login_btn").hidden = false;
+    	document.getElementById("logout_btn").hidden = true;
+		document.location.href = "store.html";
+	}
+
+    $(document).ready(function() {
+        // 發出GET的AJAX請求取得原本該會員的資料
+        $("#sql_log > tbody").empty();
+        getMember();
+    });
+</script>
 
 </html>

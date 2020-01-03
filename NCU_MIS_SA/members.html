@@ -32,11 +32,11 @@
             <!-- Nav -->
             <nav id="nav">
                 <ul>
-					<li><a href="new_members.html">會員及管理者資料管理</a></li>
-                    <li><a href="new_orderList.html">訂單管理</a></li>
+					<li><a href="members.html">會員及管理者資料管理</a></li>
+                    <li><a href="orderList.html">訂單管理</a></li>
                 </ul>
                 <input type="button" onclick="logout()" value="登出" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
-                <!--input type="button" onclick="javascript:location.href='new_login.html'" value="Login" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;"-->
+                <!--input type="button" onclick="javascript:location.href='login.html'" value="Login" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;"-->
             </nav>
         </div>
         <div class="container">
@@ -190,7 +190,7 @@
                         table_html += '<td>' + value['address'] + '</td>';
                         //table_html += '<td>' + value['license'] + '</td>';
                         //table_html += '<td>' + value['created'] + '</td>';
-                        table_html += '<td>' + '<a href="new_edit.html?id=' + value['id'] + '">編輯</a> | ';
+                        table_html += '<td>' + '<a href="edit.html?id=' + value['id'] + '">編輯</a> | ';
                         table_html += '<a href="javascript: deleteMember(' + value['id'] + ');">刪除</a></td></tr>';
                     })
 
@@ -225,7 +225,7 @@
             	function logout(){
             		localStorage.removeItem("User_data");
             		alert("您已登出！\n將自動為您導向首頁！")
-            		document.location.href = "new_index.html";
+            		document.location.href = "index.html";
             	}
             </script>
 </html>

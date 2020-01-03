@@ -31,12 +31,12 @@
             <!-- Nav -->
             <nav id="nav">
                 <ul>
-                    <li class="active"><a href="new_index.html">首頁</a></li>
-                    <li><a href="new_about.html">關於CCW Rent</a></li>
-                    <li><a href="new_cars.html">車輛資訊</a></li>
-                    <li><a href="new_store.html">據點查詢</a></li>
-                    <li><a href="new_notice.html">注意事項</a></li>
-                    <li><a href="new_memberInfo.html">會員資料管理</a></li>
+                    <li class="active"><a href="index.html">首頁</a></li>
+                    <li><a href="about.html">關於CCW Rent</a></li>
+                    <li><a href="cars.html">車輛資訊</a></li>
+                    <li><a href="store.html">據點查詢</a></li>
+                    <li><a href="notice.html">注意事項</a></li>
+                    <li><a href="memberInfo.html">會員資料管理</a></li>
                 </ul>
                 <input type="button" onclick="logout()" value="登出" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
             </nav>
@@ -56,7 +56,7 @@
         <div id="content" class="container">
             <section>
                 <header>
-                    <h2><a href="new_index.html">首頁</a>／會員資料管理</h2>
+                    <h2><a href="index.html">首頁</a>／會員資料管理</h2>
                 </header>
 
                 <body>
@@ -114,7 +114,7 @@
                                     <td><input name="email" maxlength="50" type="email" size="40" id="member_email" required="required" disabled></td>
                                 </div>
                             </tr>
-                            <div class="submit"><input type="button" onclick="javascript:location.href='new_edit.html'" value="修改" id="submit" style="position: absolute; right: 40px; bottom: 20px; color: white; display: inline-block; background: #80BA8E;"></div>
+                            <div class="submit"><input type="button" onclick="javascript:location.href='edit.html'" value="修改" id="submit" style="position: absolute; right: 40px; bottom: 20px; color: white; display: inline-block; background: #80BA8E;"></div>
                     </form>
                     </table>
 
@@ -282,9 +282,10 @@
     function logout(){
 		localStorage.removeItem("User_data");
     	alert("您已登出！\n並將自動為您導向首頁");
-    	document.getElementById("login_btn").hidden = false;
-    	document.getElementById("logout_btn").hidden = true;
-		document.location.href = "new_index.html";
+    	$('#login_btn').show();
+    	$('#logout_btn').hide();
+    	//document.getElementById("logout_btn").display = "none";
+		document.location.href = "index.html";
 	}
     
     /*$('#submit').click(function() {

@@ -31,12 +31,13 @@
             <!-- Nav -->
             <nav id="nav">
                 <ul>
-                    <li class="active"><a href="new_index.html">首頁</a></li>
-                    <li><a href="new_about.html">關於CCW Rent</a></li>
-                    <li><a href="new_cars.html">車輛資訊</a></li>
-                    <li><a href="new_store.html">據點查詢</a></li>
-                    <li><a href="new_notice.html">注意事項</a></li>
+                    <li class="active"><a href="index.html">首頁</a></li>
+                    <li><a href="about.html">關於CCW Rent</a></li>
+                    <li><a href="cars.html">車輛資訊</a></li>
+                    <li><a href="store.html">據點查詢</a></li>
+                    <li><a href="notice.html">注意事項</a></li>
                 </ul>
+                <input type="button" id="login_btn" onclick="javascript:location.href='register.html'" value="註冊" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
             </nav>
         </div>
         <div class="container">
@@ -54,8 +55,7 @@
         <div id="content" class="container">
             <section>
                 <header>
-                    <h2><a href="index.html">首頁</a>／登入
-                        <h2>
+                    <h2><a href="index.html">首頁</a>／登入<h2>
                 </header>
 
                 <body>
@@ -202,7 +202,7 @@
     							var data_string = JSON.stringify(data);
     							console.log(data_string);
     							localStorage.setItem("User_data", JSON.stringify(data_string));
-    							document.location.href = "new_members.html";
+    							document.location.href = "members.html";
                         }
                 	} catch(TypeError){
                 		alert("管理者不存在！");
@@ -268,7 +268,7 @@
     							var data_string = JSON.stringify(data);
     							console.log(data_string);
     							localStorage.setItem("User_data", JSON.stringify(data_string));
-                            	document.location.href = "new_index.html";
+                            	document.location.href = "index.html";
                             	console.log(admin);
                         }
                 	} catch(TypeError){

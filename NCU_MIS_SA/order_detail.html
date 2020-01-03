@@ -1,186 +1,129 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE HTML>
+<!--
+	Linear by TEMPLATED
+    templated.co @templatedco
+    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-  <meta name="generator" content="Jekyll v3.8.5">
-
-  <title>訂單詳情 ｜ NCU MIS SA</title>
-
-  <!-- Bootstrap core CSS -->
-  <link href="statics/css/bootstrap.min.css" rel="stylesheet">
-  <link href="statics/css/font-awesome.min.css" rel="stylesheet">
-  <link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
-  <link href="statics/icon/favicon.ico" type="image/x-icon" rel="shortcut icon">
-
-
-  <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
-  </style>
-  <!-- Custom styles for this template -->
-  <link href="statics/css/product.css" rel="stylesheet">
-  <link href="statics/css/jquery-confirm.css" rel="stylesheet">
-
-  <script src="statics/js/jquery-3.4.1.min.js"></script>
-  <script src="statics/js/jquery-confirm.js"></script>
-  <script src="statics/js/big.min.js"></script>
+    <title>訂單詳情</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700,500,900' rel='stylesheet' type='text/css'>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/skel.min.js"></script>
+    <script src="js/skel-panels.min.js"></script>
+    <script src="js/init.js"></script>
+    <noscript>
+			<link rel="stylesheet" href="css/skel-noscript.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-desktop.css" />
+		</noscript>
+	<script src="statics/js/jquery-3.4.1.min.js"></script>
+  	<script src="statics/js/jquery-confirm.js"></script>
+  	<script src="statics/js/big.min.js"></script>
 </head>
 
 <body>
-  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-    <h5 class="my-0 mr-md-auto font-weight-normal">NCU_MIS-SA</h5>
-    <nav class="my-2 my-md-0 mr-md-3">
-      <a class="p-2 text-dark" href="index.html">會員管理模組</a>
-      <a class="p-2 text-dark" href="product.html">車輛列表</a>
-      <a class="p-2 text-dark" href="order.html">訂單列表</a>
-    </nav>
-    <a class="btn btn-outline-primary" href="cart.html">結帳</a>
-  </div>
 
-  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center bg-light">
-    <h1 class="display-4">訂單詳情</h1>
-    <p class="lead">以下為該筆訂單之所有資料</p>
-  </div>
+    <!-- Header -->
+    <div id="header">
+        <div id="nav-wrapper">
+            <!-- Nav -->
+            <nav id="nav">
+                <ul>
+					<li><a href="members.html">會員管理</a></li>
+                    <li><a href="orderList.html">訂單管理</a></li>
+                </ul>
+                <input type="button" onclick="logout()" value="登出" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;">
+                <!--input type="button" onclick="javascript:location.href='login.html'" value="Login" style="position: absolute; right: 40px; top: 20px; color: white; display: inline-block; background: #80BA8E;"-->
+            </nav>
+        </div>
+        <div class="container">
 
-  <div class="container">
-	  <div class="py-5">    
-	  	<div class="my-3 p-3 bg-white rounded box-shadow">
-        <h6 class="border-bottom border-gray pb-2 mb-0">訂單資料</h6>
-        
-        <div class="row">
-	        <div class="col media text-muted pt-3">
-	          <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-	            <strong class="d-block text-gray-dark">訂單編號</strong>
-	            <span id="order_id">{{order_id}}</span>
-	          </p>
-	        </div>
-	        
-	        <div class="col media text-muted pt-3">
-             <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-               <strong class="d-block text-gray-dark">修改日期</strong>
-               <span id="modify">{{modify}}</span>
-             </p>
-           </div>
-           
-           <div class="col media text-muted pt-3">
-             <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-               <strong class="d-block text-gray-dark">建立日期</strong>
-               <span id="create">{{create}}</span>
-             </p>
-           </div>
-         </div>
-         
-         <div class="row">
-           <div class="col media text-muted pt-3">
-             <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-               <strong class="d-block text-gray-dark">姓名</strong>
-               <span id="name" class="p-2">{{name}}</span>
-             </p>
-           </div>
-           
-          <div class="col media text-muted pt-3">
-            <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-              <strong class="d-block text-gray-dark">手機號碼</strong>
-              <span id="phone">{{phone}}</span>
-            </p>
-          </div>
-          
-          <div class="col media text-muted pt-3">
-            <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-              <strong class="d-block text-gray-dark">電子郵件</strong>
-              <span id="email">{{email}}</span>
-            </p>
-          </div>
-         </div>
-         
-         <div class="media text-muted pt-3">
-           <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-             <strong class="d-block text-gray-dark">租賃地點</strong>
-             <span id="rentlocation">{{rentlocation}}</span>
-           </p>
-         </div>
-         
-         <div class="media text-muted pt-3">
-           <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-             <strong class="d-block text-gray-dark">還車地點</strong>
-             <span id="backlocation">{{backlocation}}</span>
-           </p>
-         </div>
-         
-         <div class="media text-muted pt-3">
-           <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-             <strong class="d-block text-gray-dark">租賃日期</strong>
-             <span id="rentdate">{{rentdate}}</span>
-           </p>
-         </div>
-         
-         <div class="media text-muted pt-3">
-           <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-             <strong class="d-block text-gray-dark">還車日期</strong>
-             <span id="backdate">{{backdate}}</span>
-           </p>
-         </div>
-         
-         <div class="media text-muted pt-3">
-           <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-             <strong class="d-block text-gray-dark">住址</strong>
-             <span id="address">{{address}}</span>
-           </p>
-         </div>
-         
-         <div class="row">
-          <div class="col media text-muted pt-3">
-            <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-              <strong class="d-block text-gray-dark">項目數量</strong>
-              <span id="item">{{item}}</span>
-            </p>
-          </div>
-          
-          <div class="col media text-muted pt-3">
-             <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-               <strong class="d-block text-gray-dark">商品總數</strong>
-               <span id="quantity">{{quantity}}</span>
-             </p>
-           </div>
-         </div>
-        
-        <H3 class="d-block text-right mt-3">總價：$ <span id="total">{{total}}</span></H3>
-      </div>
+            <!-- Logo -->
+            <div id="logo">
+                <a href="#" style="color: rgba(0, 0, 0, 0);">CCW RENT</a>
+            </div>
+        </div>
+    </div>
+    <!-- Header -->
 
-       
-       <div class="table-responsive">
-         <table id="table" class="table table-striped table-sm">
-           <thead>
-             <tr>
-               <th class="text-center" style="width: 10%">商品編號</th>
-               <th class="text-center" style="width: 40%">品名</th>
-               <th class="text-center" style="width: 15%">單價</th>
-               <th class="text-center" style="width: 10%">數量</th>
-               <th class="text-center" style="width: 15%">小計</th>
-             </tr>
-           </thead>
-           <tbody id="panel">
-           </tbody>
-         </table>
-       </div>
-     </div>
-  </div>
+    <!-- Main -->
+    <div id="main">
+        <div id="content" class="container">
+            <section>
+                <header>
+                    <h2>管理者模式/訂單詳情</h2>
+                    <h3><br>以下是該筆訂單之所有詳細資料</h3>
+                </header>
+
+                <body>
+                    <table style="width: 80%;">
+                        <tr>
+                            <th colspan="4">訂單資料：</th>
+                        </tr>
+                        <tr>
+                            <td colspan="2">訂單編號：<label id="orderID" style="font-weight:bold;">{{orderID}}</label></td>
+                            <td colspan="2">建立日期：<label id="orderCreate" style="font-weight:bold;">{{orderCreate}}</label></td>
+                        </tr>
+                        <tr>
+                            <td>姓名：<label id="orderName" style="font-weight:bold;">{{orderName}}</label></td>
+                            <td>手機號碼：<label id="orderPhone" style="font-weight:bold;">{{orderPhone}}</label></td>
+                            <td>身分證字號：<label id="orderUserID" style="font-weight:bold;">{{orderUserID}}</label></td>
+                            <td>電子郵件：<label id="orderEmail" style="font-weight:bold;">{{orderEmail}}</label></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">住址：<label id="orderAddress" style="font-weight:bold;">{{orderAddress}}</label></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">車型：<label id="orderProduct" style="font-weight:bold;">{{orderProduct}}</label></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">取車地點：<label id="rentLocation" style="font-weight:bold;">{{rentLocation}}</label></td>
+                            <td colspan="2">還車地點：<label id="backLocation" style="font-weight:bold;">{{backLocation}}</label></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">取車日期：<label id="rentDay" style="font-weight:bold;">{{rentDay}}</label></td>
+                            <td colspan="2">還車日期：<label id="backDay" style="font-weight:bold;">{{backDay}}</label></td>
+                        </tr>
+                    </table>
+                    <div align="right"><strong style="font-size:24px;font-weight:bold;">總價：<label id="totalPrice" style="font-weight:bold;">{{totalPrice}}</label></strong></div>
+                </body>
+            </section>
+        </div>
+    </div>
+    <!-- /Main -->
+
+    <!-- Tweet -->
+    <div id="tweet">
+        <div class="container" style="color: white; font-size: 20px;">
+            <section>
+                <p>全台據點隨你搜<br>現在就來CCW RENT一下吧</p>
+            </section>
+        </div>
+    </div>
+    <!-- /Tweet -->
+
+    <!-- Footer -->
+    <div id="footer">
+        <div class="container">
+            <section>
+                <header>
+                    <h2>聯絡方式</h2>
+                    <span class="byline"> <br>Survice phone number      0975376458</span>
+                </header>
+                <ul class="contact">
+                    <li><a href="#" class="fa fa-twitter"><span>Twitter</span></a></li>
+                    <li class="active"><a href="#" class="fa fa-facebook"><span>Facebook</span></a></li>
+                    <li><a href="#" class="fa fa-dribbble"><span>Pinterest</span></a></li>
+                    <li><a href="#" class="fa fa-tumblr"><span>Google+</span></a></li>
+                </ul>
+            </section>
+        </div>
+    </div>
 
   <script>
   //取得網址參數
@@ -199,6 +142,7 @@
           timeout: 100000,
           success: function (response) {
               if(response.status == 200){
+            	  console.log(response.response.data);
             	  updateHTML(response.response.data);
               }
           },
@@ -211,62 +155,35 @@
   getOrderData();
   
   function updateHTML(data) {
-	  $("#order_id").html(data['order_info']['id']);
-	  $("#create").html(data['order_info']['create']);
-	  $("#modify").html(data['order_info']['modify']);
-	  $("#email").html(data['order_info']['email']);
-	  $("#rentlocation").html(data['order_info']['rentlocation']);
-	  $("#backlocation").html(data['order_info']['backlocation']);
-	  $("#rentdate").html(data['order_info']['rentdate']);
-	  $("#backdate").html(data['order_info']['backdate']);
-	  $("#address").html(data['order_info']['address']);
-	  $("#phone").html(data['order_info']['phone']);
-	  $("#name").html(data['order_info']['name']);
-	  $("#item").html(data.product_info.length);
-	  
-	  var total_price = Big(0.0);
-	  var quantity = 0;
-	  var inner_html = "";
-	  
-	  $.each(data.product_info, function (k, v) {
-		  quantity += v['quantity'];
-		  total_price = total_price.plus(v['subtotal']);
-		  inner_html += updateOrderProductTable(v);
-	  });
-	  
-	  $("#quantity").html(quantity);
-	  $("#total").html(total_price.toString());
-	  
-	  $("#table > tbody").empty();
-	  $("#panel").append(inner_html);
+	  $("#orderID").html(data['order_info']['id']);
+	  $("#orderCreate").html(data['order_info']['create']);
+	  $("#orderName").html(data['order_info']['name']);
+	  $("#orderPhone").html(data['order_info']['phone']);
+	  $("#orderUserID").html(data['order_info']['IDnumber']);
+	  $("#orderEmail").html(data['order_info']['email']);
+	  $("#orderAddress").html(data['order_info']['address']);
+	  $("#orderProduct").html(data['order_info']['carName']);
+	  $("#rentLocation").html(data['order_info']['rentlocation']);
+	  $("#backLocation").html(data['order_info']['backlocation']);
+	  $("#rentDay").html(data['order_info']['rentdate']);
+	  $("#backDay").html(data['order_info']['backdate']);
+	  $("#totalPrice").html(data['order_info']['totalPrice']);
 
   }
   
-  function updateOrderProductTable(data) {
-	  var table_html = "";
-	  table_html += '<tr id="row_' + data.id + '">';
-    table_html += '<td class="align-middle text-center">' + data.product.id + '</td>';
-    table_html += '<td class="align-middle"><p class="text-break">' + data.product.name + '</p></td>';
-    table_html += '<td class="align-middle text-center"><span id="price_' + data.id + '">' + data.price + '</td>';
-    table_html += '<td class="align-middle text-center">' + data.quantity + '</td>';
-    table_html += '<td class="align-middle text-center"><strong><span id="subtotal_' + data.id + '">' + data.subtotal + '<strong></td>';
-    table_html += '</tr>';
-	  
-	  return table_html;
-	  
-  }
+	function logout(){
+		localStorage.removeItem("User_data");
+		alert("您已登出！\n將自動為您導向首頁！")
+		document.location.href = "index.html";
+	}
   </script>
 
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-right">
-        <a href="#">Back to top</a>
-      </p>
-      <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-      <p>New to Bootstrap? <a href="https://getbootstrap.com/">Visit the homepage</a> or read our <a
-          href="/docs/4.3/getting-started/introduction/">getting started guide</a>.</p>
-    </div>
-  </footer>
+
+
+
+
+
+
 </body>
 
 </html>

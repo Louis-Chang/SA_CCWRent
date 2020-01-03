@@ -59,9 +59,10 @@ public class StoreHelper {
                 String address = rs.getString("address");
                 String city = rs.getString("city");
                 String district = rs.getString("district");
+                String phone = rs.getString("phone");
                 
                 /** 將每一筆商品資料產生一名新Store物件 */
-                s = new Store(store_id, name, address, city, district);
+                s = new Store(store_id, name, address, city, district, phone);
                 /** 取出該項商品之資料並封裝至 JSONsonArray 內 */
                 jsa.put(s.getData());
             }
@@ -140,9 +141,10 @@ public class StoreHelper {
                 String address = rs.getString("address");
                 String city = rs.getString("city");
                 String district = rs.getString("district");
+                String phone = rs.getString("phone");
                 
                 /** 將每一筆商品資料產生一名新Store物件 */
-                s = new Store(store_id, name, address, city, district);
+                s = new Store(store_id, name, address, city, district, phone);
                 /** 取出該項商品之資料並封裝至 JSONsonArray 內 */
                 jsa.put(s.getData());
             }
@@ -204,9 +206,10 @@ public class StoreHelper {
                 String address = rs.getString("address");
                 String city = rs.getString("city");
                 String district = rs.getString("district");
+                String phone = rs.getString("phone");
                 
                 /** 將每一筆商品資料產生一名新Store物件 */
-                s = new Store(store_id, name, address, city, district);
+                s = new Store(store_id, name, address, city, district, phone);
             }
 
         } catch (SQLException e) {
@@ -271,9 +274,10 @@ public class StoreHelper {
                 String address = rs.getString("address");
                 String city = rs.getString("city");
                 String district = rs.getString("district");
+                String phone = rs.getString("phone");
                 
                 /** 將每一筆商品資料產生一名新Store物件 */
-                s = new Store(store_id, name, address, city, district);
+                s = new Store(store_id, name, address, city, district, phone);
                 /** 取出該項商品之資料並封裝至 JSONsonArray 內 */
                 jsa.put(s.getData());
             }

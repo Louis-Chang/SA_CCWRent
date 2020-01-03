@@ -7,22 +7,25 @@ public class Store {
 	private String address;
 	private String city;
 	private String district;
+	private String phone;
 	
 	public Store(int id) {
 		this.id = id;
 	}
-	public Store(String name, String address, String city, String district) {
+	public Store(String name, String address, String city, String district, String phone) {
 		this.name = name;
 		this.address = address;
 		this.city = city;
 		this.district = district;
+		this.phone = phone;
 	}
-	public Store(int id, String name, String address, String city, String district) {
+	public Store(int id, String name, String address, String city, String district, String phone) {
 		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.city = city;
 		this.district = district;
+		this.phone = phone;
 	}
 	
 	public int getID() {
@@ -40,6 +43,9 @@ public class Store {
 	public String getDistrict() {
 		return this.district;
 	}
+	public String getPhone() {
+		return this.phone;
+	}
 	public JSONObject getData() {
         /** 透過JSONObject將該項產品所需之資料全部進行封裝*/
         JSONObject jso = new JSONObject();
@@ -48,6 +54,7 @@ public class Store {
         jso.put("address", getAddress());
         jso.put("city", getCity());
         jso.put("district", getDistrict());
+        jso.put("phone", getPhone());
         return jso;
     }
 }

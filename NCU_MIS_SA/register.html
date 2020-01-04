@@ -175,6 +175,30 @@
             submit();
         });
 
+        function checkUserID(id){
+        	var checknum = true; 
+            const confirmArray=["A",10,"B",11,"C",12,"D",13,"E",14,"F",15,"G",16,"H",17,"I",34,"J",18,"K",19,"L",20,"M",21,"N",22,"O",35,
+                      			"P",23,"Q",24,"R",25,"S",26,"T",27,"U",28,"V",29,"W",32,"X",30,"Y",31,"Z",33]
+            for(var i=0;i<=confirmArray.length;i++){
+                if (id[0]==confirmArray[i]){
+                    var num = parseInt(confirmArray[i+1], 10)
+                }
+            }
+            var total=parseInt(num/10, 10)+(num%10)*9+parseInt(id[1], 10)*8+parseInt(id[2], 10)*7+parseInt(id[3], 10)*6+parseInt(id[4], 10)*5+parseInt(id[5], 10)*4+parseInt(id[6], 10)*3+parseInt(id[7], 10)*2+parseInt(id[8], 10)*1;
+            if (parseInt(total, 10)%10 != (10-parseInt(id[9], 10))){
+        		checknum = false;
+        		console.log(total);
+        		console.log(10-parseInt(id[9], 10));
+        	}
+        	else{
+            	if (id.length!=10){
+            		checknum = false;
+            	}
+        	}
+            return checknum;
+        }
+        
+        
         function submit() {
             var IDNumber = $('#member_IDNumber').val();
             var password = $('#member_password').val();
@@ -198,7 +222,10 @@
                 alert("密碼格式不符，長度至少8，且至少包含一個數字和英文字母！");
             } else if(!mobilephone_rule.test(mobilephone)){
             	alert("手機號碼格式不符！");
-            } else {
+            } else if(checkUserID(IDNumber)==false){
+            	alert("此為錯誤的身分證號碼，不符合身分證規則");
+            } 
+            else {
                 // 將資料組成JSON格式
                 var data_object = {
                     "IDNumber": IDNumber,

@@ -706,5 +706,19 @@ public class MemberHelper {
             DBMgr.close(pres, conn);
         }
     }
-
+    
+    
+    /*public String testDuplicate(String IDNumber) {
+    	String result = "";
+    	try {
+    		String query = "SELECT * from `missa`.`members` WHERE `IDNumber` = ?";
+    		conn = DBMgr.getConnection();
+    		pres = conn.prepareStatement(query);
+    		pres.setString(1, IDNumber);
+    		pres.executeQuery();
+    	} catch(SQLException e) {
+    		
+    	}
+    	return result;
+    }*/
 }
